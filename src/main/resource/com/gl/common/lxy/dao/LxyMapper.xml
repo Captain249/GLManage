@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gl.common.lxy.dao.LxyMapper">
+
+    <resultMap id="baseResultMap" type="com.gl.common.lxy.bean.Lxy">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="grouptype" property="grouptype" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="countmem" property="countmem" jdbcType="INTEGER"/>
+        <result column="principal" property="principal" jdbcType="VARCHAR"/>
+        <result column="phonenum" property="phonenum" jdbcType="VARCHAR"/>
+        <result column="memberlist" property="memberlist" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="VARCHAR"/>
+        <result column="profit" property="profit" jdbcType="VARCHAR"/>
+        <result column="date" property="date" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="queryAllLxy" resultMap="baseResultMap">
+        select * from lxy where 1 = 1
+        <if test="checkLxy != null">
+            <if test="checkLxy.name != null and checkLxy.name != '' ">
+                and name like CONCAT('%', #{checkLxy.name} ,'%')
+            </if>
+        </if>
+        limit #{currentPage},#{pageLimit}
+    </select>
+
+    <select id="queryFinishLxy" resultMap="baseResultMap">
+        select * from lxy where 1 = 1
+        <if test="checkLxy != null">
+            <if test="checkLxy.name != null and checkLxy.name != '' ">
+                and name like CONCAT('%', #{checkLxy.name} ,'%')
+            </if>
+        </if>
+        and status = '已完结'
+        limit #{currentPage},#{pageLimit}
+    </select>
+
+    <select id="queryProcessLxy" resultMap="baseResultMap">
+        select * from lxy where 1 = 1
+        <if test="checkLxy != null">
+            <if test="checkLxy.name != null and checkLxy.name != '' ">
+                and name like CONCAT('%', #{checkLxy.name} ,'%')
+            </if>
+        </if>
+        and status = '未完结'
+        limit #{currentPage},#{pageLimit}
+    </select>
+
+    <select id="queryLxyByExample" parameterType="com.gl.common.lxy.bean.Lxy" resultMap="baseResultMap">
+        select * from lxy where 1 = 1
+        <if test="id != null and id != '' ">
+            and id = #{id}
+        </if>
+        <if test="name != null and name != '' ">
+            and name like CONCAT('%', #{name} ,'%')
+        </if>
+    </select>
+
+    <update id="updateLxyByExample" parameterType="com.gl.common.lxy.bean.Lxy">
+        update lxy
+        <set>
+            <if test="grouptype != null and grouptype != ''">
+                grouptype = #{grouptype,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="countmem != null and countmem != ''">
+                countmem = #{countmem,jdbcType=INTEGER},
+            </if>
+            <if test="principal != null and principal != ''">
+                principal = #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenum != null and phonenum != ''">
+                phonenum = #{phonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="memberlist != null and memberlist != ''">
+                memberlist = #{memberlist,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null and price != ''">
+                price = #{price,jdbcType=VARCHAR},
+            </if>
+            <if test="profit != null and profit != ''">
+                profit = #{profit,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null and date != ''">
+                date = #{date,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <insert id="insertLxy" parameterType="com.gl.common.lxy.bean.Lxy">
+        insert into lxy
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test="name != null and name!= ''">
+                name,
+            </if>
+            <if test="grouptype != null and grouptype!= ''">
+                grouptype,
+            </if>
+            <if test="countmem != null and countmem!= ''">
+                countmem,
+            </if>
+            <if test="principal != null and principal!= ''">
+                principal,
+            </if>
+            <if test="phonenum != null and phonenum!= ''">
+                phonenum,
+            </if>
+            <if test="memberlist != null and memberlist!= ''">
+                memberlist,
+            </if>
+            <if test="price != null and price!= ''">
+                price,
+            </if>
+            <if test="profit != null and profit!= ''">
+                profit,
+            </if>
+            <if test="date != null and date!= ''">
+                date,
+            </if>
+            <if test="status != null and status!= ''">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            null
+            <if test="name != null and name!= ''">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="grouptype != null and grouptype!= ''">
+                #{grouptype,jdbcType=VARCHAR},
+            </if>
+            <if test="countmem != null and countmem!= ''">
+                #{countmem,jdbcType=INTEGER},
+            </if>
+            <if test="principal != null and principal!= ''">
+                #{principal,jdbcType=VARCHAR},
+            </if>
+            <if test="phonenum != null and phonenum!= ''">
+                #{phonenum,jdbcType=VARCHAR},
+            </if>
+            <if test="memberlist != null and memberlist!= ''">
+                #{memberlist,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null and price!= ''">
+                #{price,jdbcType=VARCHAR},
+            </if>
+            <if test="profit != null and profit!= ''">
+                #{profit,jdbcType=VARCHAR},
+            </if>
+            <if test="date != null and date!= ''">
+                #{date,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status!= ''">
+                #{status,jdbcType=VARCHAR}
+            </if>
+        </trim>
+    </insert>
+
+    <delete id="deleteLxyByExample" parameterType="com.gl.common.lxy.bean.Lxy">
+        delete from lxy where id = #{id}
+    </delete>
+</mapper>
