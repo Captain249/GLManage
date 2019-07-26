@@ -48,7 +48,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">人数</label>
             <div class="layui-input-block">
-                <input type="text" name="countmem" style="width:300px;" required  lay-verify="required" value="${editLxy.countmem}" autocomplete="off" class="layui-input">
+                <input type="text" name="memcount" style="width:300px;" required  lay-verify="required" value="${editLxy.memcount}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">

@@ -25,7 +25,7 @@ public class LxyServiceImpl implements LxyService {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
-            criteria.andNameLike(checkLxy.getName());
+            criteria.andNameLike("%"+checkLxy.getName()+"%");
         }
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
@@ -37,7 +37,7 @@ public class LxyServiceImpl implements LxyService {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
-            criteria.andNameLike(checkLxy.getName());
+            criteria.andNameLike("%"+checkLxy.getName()+"%");
         }
         criteria.andStatusEqualTo(1);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
@@ -50,7 +50,7 @@ public class LxyServiceImpl implements LxyService {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
-            criteria.andNameLike(checkLxy.getName());
+            criteria.andNameLike("%"+checkLxy.getName()+"%");
         }
         criteria.andStatusEqualTo(0);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
