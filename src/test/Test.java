@@ -1,42 +1,68 @@
-import com.gl.common.user.bean.User;
-import com.gl.common.user.dao.UserMapper;
-import com.gl.common.user.service.UserService;
+import com.gl.mgr.bean.*;
+import com.gl.mgr.dao.LxyMapper;
+import com.gl.mgr.dao.MemberMapper;
+import com.gl.mgr.dao.UserMapper;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import javax.annotation.Resource;
-import java.util.ArrayList;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-mybatis.xml"})
 public class Test {
-    @Resource
-    private UserService userService;
 
-    @Resource
+    @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private LxyMapper lxyMapper;
+    @Autowired
+    private MemberMapper memberMapper;
     @org.junit.Test
-    public void inserBatchTest(){
-        List<User> users = new ArrayList<User>();
-        User user1 = new User();
-        user1.setUsername("admin");
-        user1.setPassword("admin123");
-        user1.setPhonenumber("123123123");
-        user1.setRole("1");
-        user1.setAddress("beilun");
-        User user2 = new User();
-        user2.setUsername("admin");
-        user2.setPassword("admin123");
-        user2.setPhonenumber("123123123");
-        user2.setRole("1");
-        user2.setAddress("beilun");
-        users.add(user1);
-        users.add(user2);
-        //userService.insertBatch(users);
-        //userService.loginCheck(user1);
-        Integer id = 1;
-        User user = userMapper.test(1,user2);
-        System.out.println("ok");
+    public void insertUser(){
+        User user = new User();
+        user.setUsername("admin");
+        user.setPassword("admin123");
+        user.setPhonenum("17858936213");
+        user.setRole("管理员");
+        int result = userMapper.insert(user);
+    }
+
+    @org.junit.Test
+    public void insertLxy() throws ParseException {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startD = simpleDateFormat.parse("2019-06-27");
+        Date endD = simpleDateFormat.parse("2019-07-27");
+        Lxy lxy = new Lxy();
+        lxy.setGrouptype("医院");
+        lxy.setPrincipal("孙志涛");
+        lxy.setNumcount(50);
+        lxy.setPhonenum("17858936213");
+        lxy.setName("后所一日游");
+        lxy.setStartdate(startD);
+        lxy.setFinishdate(endD);
+        lxy.setPrice(new BigDecimal(2000.5));
+        lxy.setProfit(new BigDecimal(200.5));
+        lxy.setStatus(0);
+        int a = lxyMapper.insert(lxy);
+        System.out.println(a);
+    }
+
+    @org.junit.Test
+    public void insertMember(){
+        Member member = new Member();
+        member.setName("孙志涛");
+        member.setPhonenum("17858936213");
+        member.setIdcard("33020212321321321");
+        member.setAddress("后所村");
+        member.setPassport("10086");
+        int a = memberMapper.insert(member);
+        System.out.println(a);
     }
 }
