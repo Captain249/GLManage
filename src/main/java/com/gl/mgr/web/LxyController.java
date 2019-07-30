@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("lxy")
@@ -38,6 +37,11 @@ public class LxyController {
     @RequestMapping("processlxy")
     public String processlxy(){
         return "lxy/processlxy";
+    }
+
+    @RequestMapping(value = "addLxy" ,method = RequestMethod.GET)
+    public String addLxy(){
+        return "lxy/addLxy";
     }
 
     @ResponseBody
@@ -95,37 +99,45 @@ public class LxyController {
     @RequestMapping("queryLxyById")
     public Map<String,Object> queryLxyById(Lxy lxyParam){
         Map<String,Object> resutMap = new HashMap<String, Object>();
-        Lxy lxy = lxyService.queryLxyByExample(lxyParam);
-        String html = "<table width='200px'><tr><td align='right'>类型:&nbsp;</td><td><span align='left'>"+lxy.getGrouptype()+"</span></td></tr>" +
-                "<tr><td align='right'>名称:&nbsp;</td><td><span align='left'>"+lxy.getName()+"</span></td></tr>" +
-                "<tr><td align='right'>人数:&nbsp;</td><td><span align='left'>"+lxy.getNumcount()+"</span></td></tr>" +
-                "<tr><td align='right'>负责人:&nbsp;</td><td><span align='left'>"+lxy.getPrincipal()+"</span></td></tr>" +
-                "<tr><td align='right'>手机号:&nbsp;</td><td><span align='left'>"+lxy.getPhonenum()+"</span></td></tr>" +
-                "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"</span></td></tr>" +
-                "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"</span></td></tr>" +
-                "<tr><td align='right'>时间:&nbsp;</td><td><span align='left'>"+lxy.getStartdate()+"</span></td></tr>" +
-                "<tr><td align='right'>状态:&nbsp;</td><td><span align='left'>"+lxy.getStatus()+"</span></td></tr>"
+        Lxy lxy = lxyService.queryLxyById(lxyParam.getId());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String startDate = simpleDateFormat.format(lxy.getStartdate());
+        String html = "<table width='200px'>" +
+                "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"元</span></td></tr>" +
+                "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"元</span></td></tr>" +
+                "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+startDate+"</span></td></tr>"
                 +"</table>";
         resutMap.put("html",html);
         return resutMap;
     }
 
     @RequestMapping(value = "deleteLxyById" ,method = RequestMethod.POST)
-    public int deleteLxyById(Lxy lxyParam){
+    public void deleteLxyById(Lxy lxyParam){
         lxyService.deleteLxyById(lxyParam);
-        return 0;
     }
 
     @RequestMapping(value = "editLxyById" ,method = RequestMethod.GET)
     public String editLxyById(Lxy lxyParam,Model model){
         Lxy lxy = lxyService.queryLxyByExample(lxyParam);
         model.addAttribute("editLxy",lxy);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String startDate = simpleDateFormat.format(lxy.getStartdate());
+        model.addAttribute("startDate",startDate);
         return "lxy/editLxy";
     }
 
     @ResponseBody
-    @RequestMapping(value = "editLxy" ,method = RequestMethod.POST)
-    public boolean editLxy(Lxy lxyParam){
+    @RequestMapping(value = "/editLxy" ,method = RequestMethod.POST)
+    public boolean editLxy(Lxy lxyParam,String startdateStr) throws ParseException {
+        //layui时间控件是String类型，需要在这里转换
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date satrtDate = simpleDateFormat.parse(startdateStr);
+        lxyParam.setStartdate(satrtDate);
+        Lxy lxy = lxyService.queryLxyById(lxyParam.getId());
+        if(lxy.getStatus() == 0){
+            lxyParam.setStatus(1);
+            lxyParam.setFinishdate(new Date());
+        }
         lxyService.updateLxyById(lxyParam);
         return true;
     }
@@ -133,5 +145,16 @@ public class LxyController {
     @RequestMapping(value = "inserLxy" , method = RequestMethod.POST)
     public int inserLxy(Lxy lxyParam){
         return lxyService.insertLxy(lxyParam);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/doaddLxy", method = RequestMethod.POST)
+    public boolean doaddLxy(Lxy lxyParam,String startdateStr) throws ParseException {
+        lxyParam.setStatus(0);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate = simpleDateFormat.parse(startdateStr);
+        lxyParam.setStartdate(startDate);
+        lxyService.insertLxy(lxyParam);
+        return true;
     }
 }

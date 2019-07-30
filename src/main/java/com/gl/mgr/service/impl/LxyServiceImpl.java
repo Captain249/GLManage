@@ -87,4 +87,9 @@ public class LxyServiceImpl implements LxyService {
     public int updateLxyById(Lxy lxy) {
         return lxyMapper.updateByPrimaryKey(lxy);
     }
+
+    @Override
+    public Lxy queryLxyById(int id) {
+        return lxyMapper.selectByPrimaryKey(id);
+    }
 }

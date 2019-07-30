@@ -12,21 +12,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="<%=path%>/layuiadmin/layui/css/layui.css">
     <script src="<%=path%>/layuiadmin/layui/layui.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="<%=path%>/layuiadmin/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=path%>/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/layuiadmin/layui/css/layui.css" media="all">
 </head>
 <body>
-<div class="layui-inline" style="width:300px">
-    <input class="layui-input" name="keyWord" id="keyWord" autocomplete="off">
-</div><button class="layui-btn" data-type="reload">搜索</button>
-    <table class="layui-hide" id="test" lay-filter="test"></table>
+    <%--搜索框--%>
+    <div class="layui-inline" style="width:300px">
+        <input class="layui-input" name="keyWord" id="keyWord" autocomplete="off">
+    </div>
+    <button class="layui-btn" data-type="reload">搜索</button>
 
-<script type="text/html" id="barDemo2">
-    <a class="layui-btn layui-btn-xs" lay-event="add">增加</a>
-    <a class="layui-btn layui-btn-xs" lay-event="import">导入</a>
-</script>
+    <%--表格--%>
+    <table class="layui-hide" id="lxyTable" lay-filter="tableTool"></table>
 
+    <%--左上角功能块--%>
+    <script type="text/html" id="barDemo2">
+        <a class="layui-btn layui-btn-xs" lay-event="add">增加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="import">导入</a>
+    </script>
+
+    <%--表格右边功能块--%>
     <script type="text/html" id="barDemo">
         <a class="layui-btn layui-btn-xs" lay-event="detailmember">人员</a>
         <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
@@ -37,26 +43,27 @@
         layui.use('table', function(){
             var table = layui.table;
             table.render({
-                elem: '#test'
+                elem: '#lxyTable'
                 ,url:'<%=path %>/lxy/getalllxy'
                 // ,type:'post'
                 ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,id:'myTable'
                 ,cols: [[
-                    {title: '序号', width:'5%',type:'numbers', sort: true}
+                    {title: '序号', width:'5%',type:'numbers'}
                     //,{field:'id', width:'5%', title: 'ID', sort: true}
-                    ,{field:'grouptype', width:'10%', title: '类别'}
-                    ,{field:'name', width:'13%', title: '名称'}
-                    ,{field:'countmem', width:'10%', title: '人数'}
-                    ,{field:'principal',width:'10%', title: '负责人'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'grouptype', width:'7%', title: '类别'}
+                    ,{field:'name', width:'20%', title: '名称'}
+                    ,{field:'numcount', width:'7%', title: '人数'}
+                    ,{field:'principal',width:'8%', title: '负责人'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
                     ,{field:'phonenum',width:'12%', title: '联系电话'}
-                    ,{field:'date',width:'10%', title: '日期'}
-                    ,{field:'status',width:'10%', title: '状态'}
+                    ,{field:'startdate',width:'13%', title: '日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
+                    ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
                     ,{fixed: 'right', width:'20%', title:'操作', align:'center', toolbar: '#barDemo'}
                 ]]
                 ,page:true
                 ,toolbar:'#barDemo2'
             });
+
             var $ = layui.jquery, active = {
                 reload: function () {
                     var keyWord = $("#keyWord").val();
@@ -66,12 +73,14 @@
                     });
                 }
             };
+
             $('.layui-btn').on('click', function () {
                 var type = $(this).data('type');
                 active[type] ? active[type].call(this) : '';
             });
-            //监听工具条
-            table.on('tool(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+
+            //表格右边监听工具条
+            table.on('tool(tableTool)', function(obj){ //注：tool是工具条事件名，tableTool是table原始容器的属性 lay-filter="对应的值"
                 var data = obj.data; //获得当前行数据
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                 var tr = obj.tr; //获得当前行 tr 的DOM对象
@@ -84,7 +93,7 @@
                         success: function (data) {
                             layer.open({
                                 title:'查看详情',
-                                area:['200px','350px'],
+                                area:['200px','200px'],
                                 shade: 0.4,
                                 content: data.html,
                             })
@@ -129,10 +138,17 @@
                 }
             });
 
-            table.on('toolbar(test)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            //左上角功能块
+            table.on('toolbar(tableTool)', function(obj){ //注：tool是工具条事件名，tableTool是table原始容器的属性 lay-filter="对应的值"
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
-                if(layEvent === 'add'){ //查看详情
-                    alert(111);
+                if(layEvent === 'add'){
+                    var index = layer.open({
+                        title: "新增",
+                        type: 2,
+                        offset: 'auto',
+                        area: ['500px', '500px'],
+                        content: "<%=path%>/lxy/addLxy",
+                    });
                 } else if(layEvent === 'import'){ //删除
                     alert(1112);
                 }
@@ -140,7 +156,14 @@
         });
 
     </script>
-<script>
-</script>
+
+    <script type="text/html" id="stateTpl">
+        {{# if(d.status==0){ }}
+        未完结
+        {{#  } else { }}
+        已完结
+        {{#  } }}
+    </script>
+
 </body>
 </html>

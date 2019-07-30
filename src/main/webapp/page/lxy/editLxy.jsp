@@ -9,7 +9,7 @@
     <title>修改</title>
     <link rel="stylesheet" href="<%=path%>/layuiadmin/layui/css/layui.css">
     <script src="<%=path%>/layuiadmin/layui/layui.js"></script>
-    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script src="<%=path%>/layuiadmin/jquery.min.js"></script>
     <link rel="stylesheet" href="<%=path%>/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/layuiadmin/layui/css/layui.css" media="all">
 </head>
@@ -19,7 +19,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block" style="width: 300px;">
-                <select name="city" lay-verify="required">
+                <select name="grouptype" lay-verify="required">
                     <c:if test="${editLxy.grouptype eq '医院'}">
                         <option value="医院" selected>医院</option>
                         <option value="学校">学校</option>
@@ -35,7 +35,6 @@
                         <option value="学校">学校</option>
                         <option value="企业" selected>企业</option>
                     </c:if>
-
                 </select>
             </div>
         </div>
@@ -48,11 +47,11 @@
         <div class="layui-form-item">
             <label class="layui-form-label">人数</label>
             <div class="layui-input-block">
-                <input type="text" name="memcount" style="width:300px;" required  lay-verify="required" value="${editLxy.memcount}" autocomplete="off" class="layui-input">
+                <input type="text" name="numcount" style="width:300px;" required  lay-verify="required" value="${editLxy.numcount}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">负责任人</label>
+            <label class="layui-form-label">负责人</label>
             <div class="layui-input-block">
                 <input type="text" name="principal" style="width:300px;" required  lay-verify="required" value="${editLxy.principal}" autocomplete="off" class="layui-input">
             </div>
@@ -64,35 +63,36 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">价格</label>
+            <label class="layui-form-label">价格(元)</label>
             <div class="layui-input-block">
                 <input type="text" name="price" style="width:300px;" required  lay-verify="required" value="${editLxy.price}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">利润</label>
+            <label class="layui-form-label">利润(元)</label>
             <div class="layui-input-block">
                 <input type="text" name="profit" style="width:300px;" required  lay-verify="required" value="${editLxy.profit}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">时间</label>
-            <div class="layui-input-block">
-                <input type="text" name="date" style="width:300px;" required  lay-verify="required" value="${editLxy.date}" autocomplete="off" class="layui-input">
+            <div class="layui-inline">
+                <label class="layui-form-label">开始日期</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" style="width:300px;" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日" value="${startDate}">
+                </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block">
-                <c:if test="${editLxy.status eq '已完结'}">
-                    <input type="radio" name="status" value="已完结" title="已完结" checked>
-                    <input type="radio" name="status" value="未完结" title="未完结">
+                <c:if test="${editLxy.status == 1}">
+                    <input type="radio" name="status" value="1" title="已完结" checked>
+                    <input type="radio" name="status" value="0" title="未完结">
                 </c:if>
-                <c:if test="${editLxy.status eq '未完结'}">
-                    <input type="radio" name="status" value="已完结" title="已完结">
-                    <input type="radio" name="status" value="未完结" title="未完结" checked>
+                <c:if test="${editLxy.status == 0}">
+                    <input type="radio" name="status" value="1" title="已完结">
+                    <input type="radio" name="status" value="0" title="未完结" checked>
                 </c:if>
-
             </div>
         </div>
         <div class="layui-form-item">
@@ -104,10 +104,17 @@
         </div>
     </form>
     <script type="text/javascript">
-        layui.use('form', function(){
+        layui.use(['laydate','form'], function(){
             var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
             form.render();
-        })
+
+            var laydate = layui.laydate;
+            //常规用法
+            laydate.render({
+                elem: '#startdate',
+                trigger: 'click'
+            });
+        });
         $("#submitbtn").click(function(){
             var form =new FormData($("#editForm")[0]);     //通过id获取表单的数据
             $.ajax({
@@ -136,12 +143,13 @@
                     console.log("异常对象errorThrown: "+errorThrown);
                 }
             })
-        })
+        });
 
         $("#closeBt").click(function(){
             var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
             parent.layer.close(index); //再执行关闭
-        })
+        });
+
     </script>
 </body>
 </html>
