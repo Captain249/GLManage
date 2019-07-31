@@ -30,12 +30,12 @@ public class LxyServiceImpl implements LxyService {
         }
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
-        PageInfo<Lxy> page = new PageInfo<Lxy>(lxyList, pageLimit);
+        PageInfo<Lxy> page = new PageInfo<Lxy>(lxyList);
         return page;
     }
 
     @Override
-    public List<Lxy> queryFinishLxy(Lxy checkLxy, int currentPage, int pageLimit) {
+    public PageInfo<Lxy> queryFinishLxy(Lxy checkLxy, int currentPage, int pageLimit) {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
@@ -44,11 +44,12 @@ public class LxyServiceImpl implements LxyService {
         criteria.andStatusEqualTo(1);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
-        return lxyList;
+        PageInfo<Lxy> pageInfo = new PageInfo<Lxy>(lxyList);
+        return pageInfo;
     }
 
     @Override
-    public List<Lxy> queryProcessLxy(Lxy checkLxy, int currentPage, int pageLimit) {
+    public PageInfo<Lxy> queryProcessLxy(Lxy checkLxy, int currentPage, int pageLimit) {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
@@ -57,7 +58,8 @@ public class LxyServiceImpl implements LxyService {
         criteria.andStatusEqualTo(0);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
-        return lxyList;
+        PageInfo<Lxy> pageInfo = new PageInfo<Lxy>(lxyList);
+        return pageInfo;
     }
 
     @Override

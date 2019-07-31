@@ -6,7 +6,6 @@
 <html>
 <head>
     <title>全部展示</title>
-
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -16,6 +15,7 @@
     <link rel="stylesheet" href="<%=path%>/layuiadmin/style/admin.css" media="all">
     <link rel="stylesheet" href="<%=path%>/layuiadmin/layui/css/layui.css" media="all">
 </head>
+
 <body>
     <%--搜索框--%>
     <div class="layui-inline" style="width:300px">
@@ -145,10 +145,7 @@
                 ,url: '/member/excelUp' //上传接口
                 ,accept: 'file'
                 ,done: function(res){
-                    table.reload('myTable', {
-                        method: 'get',
-                        where: {keyWord: keyWord}
-                    });
+                    window.location.reload();
                 }
                 ,error: function(){
                     alert('上传失败，请联系你儿子！');

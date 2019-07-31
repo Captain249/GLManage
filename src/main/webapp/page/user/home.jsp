@@ -32,7 +32,6 @@
                         <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
                     </a>
                 </li>
-
                 <li class="layui-nav-item" lay-unselect>
                     <a href="javascript:;" layadmin-event="refresh" title="刷新">
                         <i class="layui-icon layui-icon-refresh-3"></i>
@@ -59,10 +58,9 @@
                         <cite>管理员</cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                        <dd><a lay-href="javascript:">修改密码</a></dd>
                         <hr>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        <dd style="text-align: center;"><a lay-href="javascript:">退出</a></dd>
                     </dl>
                 </li>
             </ul>
@@ -84,7 +82,6 @@
                         </a>
                         <dl class="layui-nav-child">
                             <dd><a lay-href="<%=path%>/sys/sysCtr">控制台</a></dd>
-                            <dd><a lay-href="a.html">测试功能</a></dd>
                         </dl>
                     </li>
                     <li data-name="component" class="layui-nav-item">
@@ -119,16 +116,16 @@
                             <dd class="layui-nav-itemed">
                                 <a href="javascript:;">系统设置</a>
                                 <dl class="layui-nav-child">
-                                    <dd><a lay-href="set/system/website.html">测试阶段</a></dd>
+                                    <dd><a lay-href="<%=path%>/sys/sysCtr">测试阶段</a></dd>
                                 </dl>
                             </dd>
-                            <dd class="layui-nav-itemed">
+                            <%--<dd class="layui-nav-itemed">
                                 <a href="javascript:;">我的设置</a>
                                 <dl class="layui-nav-child">
                                     <dd><a lay-href="set/user/info.html">基本资料</a></dd>
                                     <dd><a lay-href="set/user/password.html">修改密码</a></dd>
                                 </dl>
-                            </dd>
+                            </dd>--%>
                         </dl>
                     </li>
 

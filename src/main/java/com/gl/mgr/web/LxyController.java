@@ -3,6 +3,7 @@ package com.gl.mgr.web;
 import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.service.LxyService;
+import com.gl.util.EncodingTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("lxy")
@@ -48,10 +51,9 @@ public class LxyController {
     @ResponseBody
     @RequestMapping(value = "getalllxy")
     public Map<String,Object> getalllxy(@RequestParam(value="keyWord", required=false) String keyWord, int page, int limit){
-        List<Lxy> list = new ArrayList<Lxy>();
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
-            lxy.setName(keyWord);
+            lxy.setName(EncodingTool.encodeStr(keyWord));
         }
         PageInfo<Lxy> pageInfo = lxyService.queryAllLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -65,34 +67,32 @@ public class LxyController {
     @ResponseBody
     @RequestMapping("getfinishlxy")
     public Map<String,Object> getfinishlxy(@RequestParam(value="keyWord", required=false) String keyWord,int page,int limit){
-        List<Lxy> list = new ArrayList<Lxy>();
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
-            lxy.setName(keyWord);
+            lxy.setName(EncodingTool.encodeStr(keyWord));
         }
-        list = lxyService.queryFinishLxy(lxy,page,limit);
+        PageInfo<Lxy> pageInfo = lxyService.queryFinishLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
-        map.put("data",list);
+        map.put("data",pageInfo.getList());
         map.put("code",0);
         map.put("msg","");
-        map.put("count",list.size());
+        map.put("count",pageInfo.getTotal());
         return map;
     }
 
     @ResponseBody
     @RequestMapping("getprocesslxy")
     public Map<String,Object> getprocesslxy(@RequestParam(value="keyWord", required=false) String keyWord,int page,int limit){
-        List<Lxy> list = new ArrayList<Lxy>();
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
-            lxy.setName(keyWord);
+            lxy.setName(EncodingTool.encodeStr(keyWord));
         }
-        list = lxyService.queryProcessLxy(lxy,page,limit);
+        PageInfo<Lxy> pageInfo = lxyService.queryProcessLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
-        map.put("data",list);
+        map.put("data",pageInfo.getList());
         map.put("code",0);
         map.put("msg","");
-        map.put("count",list.size());
+        map.put("count",pageInfo.getTotal());
         return map;
     }
 
@@ -121,9 +121,11 @@ public class LxyController {
         return resutMap;
     }
 
+    @ResponseBody
     @RequestMapping(value = "deleteLxyById" ,method = RequestMethod.POST)
-    public void deleteLxyById(Lxy lxyParam){
+    public boolean deleteLxyById(Lxy lxyParam){
         lxyService.deleteLxyById(lxyParam);
+        return true;
     }
 
     @RequestMapping(value = "editLxyById" ,method = RequestMethod.GET)

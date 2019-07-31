@@ -3,6 +3,7 @@ package com.gl.mgr.web;
 import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Member;
 import com.gl.mgr.service.MemberService;
+import com.gl.util.EncodingTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class MemberController {
         int lid = Integer.parseInt(lxyId);
         Member member = new Member();
         if(keyWord!=null&& !"".equals(keyWord)){
-            member.setName(keyWord);
+            member.setName(EncodingTool.encodeStr(keyWord));
         }
         PageInfo<Member> pageInfo = memberService.queryAllMember(member,lid,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -73,10 +74,12 @@ public class MemberController {
         return resutMap;
     }
 
+    @ResponseBody
     @RequestMapping(value = "deleteMemberById" ,method = RequestMethod.POST)
-    public void deleteMemberById(Member member,HttpSession session){
+    public boolean deleteMemberById(Member member,HttpSession session){
         int lxyId =(Integer) session.getAttribute("lxyId");
         memberService.deleteMemberById(member.getId(),lxyId);
+        return true;
     }
 
     @RequestMapping(value = "editMemberById" ,method = RequestMethod.GET)

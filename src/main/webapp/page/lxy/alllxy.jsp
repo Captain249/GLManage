@@ -44,9 +44,9 @@
             table.render({
                 elem: '#lxyTable'
                 ,url:'<%=path %>/lxy/getalllxy'
-                // ,type:'post'
                 ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,id:'myTable'
+                ,method:'post'
                 ,cols: [[
                     {title: '序号', width:'5%',type:'numbers'}
                     //,{field:'id', width:'5%', title: 'ID', sort: true}

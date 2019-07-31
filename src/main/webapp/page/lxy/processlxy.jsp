@@ -29,7 +29,6 @@
 <%--左上角功能块--%>
 <script type="text/html" id="barDemo2">
     <a class="layui-btn layui-btn-xs" lay-event="add">增加</a>
-    <a class="layui-btn layui-btn-xs" lay-event="import">导入</a>
 </script>
 
 <%--表格右边功能块--%>

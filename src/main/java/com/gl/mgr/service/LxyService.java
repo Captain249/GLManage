@@ -3,12 +3,10 @@ package com.gl.mgr.service;
 import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Lxy;
 
-import java.util.List;
-
 public interface LxyService {
     PageInfo<Lxy> queryAllLxy(Lxy checkLxy, int currentPage, int pageLimit);
-    List<Lxy> queryFinishLxy(Lxy checkLxy,int currentPage,int pageLimit);
-    List<Lxy> queryProcessLxy(Lxy checkLxy,int currentPage,int pageLimit);
+    PageInfo<Lxy> queryFinishLxy(Lxy checkLxy,int currentPage,int pageLimit);
+    PageInfo<Lxy> queryProcessLxy(Lxy checkLxy,int currentPage,int pageLimit);
     Lxy queryLxyByExample(Lxy lxy);
     int insertLxy(Lxy lxy);
     int deleteLxyById(Lxy lxy);
