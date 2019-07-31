@@ -24,40 +24,38 @@
     <button class="layui-btn" data-type="reload">搜索</button>
 
     <%--表格--%>
-    <table class="layui-hide" id="lxyTable" lay-filter="tableTool"></table>
+    <table class="layui-hide" id="memberTable" lay-filter="tableTool"></table>
 
     <%--左上角功能块--%>
     <script type="text/html" id="barDemo2">
         <a class="layui-btn layui-btn-xs" lay-event="add">增加</a>
+        <a class="layui-btn layui-btn-xs" lay-event="import" id="import">导入</a>
     </script>
 
     <%--表格右边功能块--%>
     <script type="text/html" id="barDemo">
-        <a class="layui-btn layui-btn-xs" lay-event="detailmember">人员</a>
         <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
     </script>
     <script>
-        layui.use('table', function(){
+        layui.use(['table','upload'], function(){
             var table = layui.table;
             table.render({
-                elem: '#lxyTable'
-                ,url:'<%=path %>/lxy/getalllxy'
+                elem: '#memberTable'
+                ,url:'<%=path %>/member/queryAllMember?lxyId='+${lxyId}
                 // ,type:'post'
                 ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
                 ,id:'myTable'
                 ,cols: [[
                     {title: '序号', width:'5%',type:'numbers'}
                     //,{field:'id', width:'5%', title: 'ID', sort: true}
-                    ,{field:'grouptype', width:'7%', title: '类别'}
-                    ,{field:'name', width:'20%', title: '名称'}
-                    ,{field:'numcount', width:'7%', title: '人数'}
-                    ,{field:'principal',width:'8%', title: '负责人'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                    ,{field:'phonenum',width:'12%', title: '联系电话'}
-                    ,{field:'startdate',width:'13%', title: '日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
-                    ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
-                    ,{fixed: 'right', width:'21%', title:'操作', align:'center', toolbar: '#barDemo'}
+                    ,{field:'name', width:'10%', title: '姓名'}
+                    ,{field:'phonenum', width:'13%', title: '手机号'}
+                   // ,{field:'address', width:'7%', title: '地址'}
+                    ,{field:'idcard',width:'18%', title: '身份证号'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                   // ,{field:'passport',width:'12%', title: '护照'}
+                    ,{fixed: 'right', width:'20%', title:'操作', align:'center', toolbar: '#barDemo'}
                 ]]
                 ,page:true
                 ,toolbar:'#barDemo2'
@@ -86,13 +84,13 @@
                 if(layEvent === 'detail'){ //查看详情
                     $.ajax({
                         type:"post",
-                        url:"<%=path %>/lxy/queryLxyById",
+                        url:"<%=path %>/member/queryMemberById",
                         dataType:'json',
                         data: "id="+data.id ,
                         success: function (data) {
                             layer.open({
                                 title:'查看详情',
-                                area:['200px','200px'],
+                                area:['420px','180px'],
                                 shade: 0.4,
                                 content: data.html,
                             })
@@ -107,7 +105,7 @@
                         layer.close(index);
                         $.ajax({
                             type:"post",
-                            url:"<%=path %>/lxy/deleteLxyById",
+                            url:"<%=path %>/member/deleteMemberById",
                             dataType:'json',
                             data: "id="+data.id ,
                         })
@@ -118,24 +116,10 @@
                         title: "编辑",
                         type: 2,
                         offset: 'auto',
-                        area: ['500px', '500px'],
-                        content: "<%=path%>/lxy/editLxyById?id="+data.id,
-                        offset:"t"
+                        area: ['500px', '450px'],
+                        content: "<%=path%>/member/editMemberById?id="+data.id,
                     });
-                    /*//同步更新缓存对应的值
-                    obj.update({
-                        grouptype: '123'
-                        ,title: 'xxx'
-                    });*/
-                } else if(layEvent == 'detailmember'){
-                    $("#member", parent.document).attr("lay-href","<%=path%>/member/allmembers?lxyId="+data.id);
-                    $("#member", parent.document)[0].click();
-                    //$("#member", parent.document).attr("lay-href","<%=path%>/member/allmembers?lxyId=0");
-                }/*else if(layEvent == 'add'){
-                    alert(11);
-                }else if(layEvent == 'import'){
-                    alert(112);
-                }*/
+                }
             });
 
             //左上角功能块
@@ -146,25 +130,32 @@
                         title: "新增",
                         type: 2,
                         offset: 'auto',
-                        area: ['500px', '500px'],
-                        content: "<%=path%>/lxy/addLxy",
-                        offset:"t"
+                        area: ['500px', '450px'],
+                        content: "<%=path%>/member/addMember",
                     });
-                } else if(layEvent === 'import'){ //删除
+                } /*else if(layEvent === 'import'){
                     alert(1112);
+                }*/
+            });
+
+            var upload = layui.upload;
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#import' //绑定元素
+                ,url: '/member/excelUp' //上传接口
+                ,accept: 'file'
+                ,done: function(res){
+                    table.reload('myTable', {
+                        method: 'get',
+                        where: {keyWord: keyWord}
+                    });
+                }
+                ,error: function(){
+                    alert('上传失败，请联系你儿子！');
                 }
             });
+
         });
-
     </script>
-
-    <script type="text/html" id="stateTpl">
-        {{# if(d.status==0){ }}
-        未完结
-        {{#  } else { }}
-        已完结
-        {{#  } }}
-    </script>
-
 </body>
 </html>

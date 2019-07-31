@@ -101,7 +101,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.gl.mgr.bean.Member" >
+  <insert id="insert" parameterType="com.gl.mgr.bean.Member" useGeneratedKeys="true" keyProperty="id">
     insert into member (id, name, phonenum, 
       address, idcard, passport, 
       more)
@@ -240,4 +240,13 @@
       more = #{more,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryMembersByLxyId" resultType="java.lang.Integer">
+      select memberId from lxy_member where lxyId = #{lxyId}
+  </select>
+  <delete id="deleteLxyMember">
+      delete from lxy_member where lxyId = #{lxyId} and memberId = #{memberId}
+  </delete>
+  <insert id="insertLxyMember">
+      insert into lxy_member (lxyId,memberId) values (#{lxyId},#{memberId})
+  </insert>
 </mapper>

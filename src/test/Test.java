@@ -62,7 +62,14 @@ public class Test {
         member.setIdcard("33020212321321321");
         member.setAddress("后所村");
         member.setPassport("10086");
-        int a = memberMapper.insert(member);
-        System.out.println(a);
+        for (int i = 0 ;i<15;i++){
+            memberMapper.insert(member);
+        }
+    }
+
+    @org.junit.Test
+    public void mem_lxytest(){
+        List<Integer> idlist = memberMapper.queryMembersByLxyId(1);
+        System.out.println("a");
     }
 }

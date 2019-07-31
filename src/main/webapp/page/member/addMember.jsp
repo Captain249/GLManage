@@ -15,84 +15,40 @@
 </head>
 <body>
     <form id="editForm" class="layui-form" autocomplete="off">
-        <input type="text" name="id" value="${editLxy.id}" hidden="hidden" >
         <div class="layui-form-item">
-            <label class="layui-form-label">类型</label>
-            <div class="layui-input-block" style="width: 300px;">
-                <select name="grouptype" lay-verify="required">
-                    <c:if test="${editLxy.grouptype eq '医院'}">
-                        <option value="医院" selected>医院</option>
-                        <option value="学校">学校</option>
-                        <option value="企业">企业</option>
-                    </c:if>
-                    <c:if test="${editLxy.grouptype eq '学校'}">
-                        <option value="医院">医院</option>
-                        <option value="学校" selected>学校</option>
-                        <option value="企业">企业</option>
-                    </c:if>
-                    <c:if test="${editLxy.grouptype eq '企业'}">
-                        <option value="医院">医院</option>
-                        <option value="学校">学校</option>
-                        <option value="企业" selected>企业</option>
-                    </c:if>
-                </select>
+            <label class="layui-form-label">姓名</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">名称</label>
+            <label class="layui-form-label">身份证</label>
             <div class="layui-input-block">
-                <input type="text" name="name" style="width:300px;" required  lay-verify="required" value="${editLxy.name}" autocomplete="off" class="layui-input">
+                <input type="text" name="idcard" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">人数</label>
+            <label class="layui-form-label">地址</label>
             <div class="layui-input-block">
-                <input type="text" name="numcount" style="width:300px;" required  lay-verify="required" value="${editLxy.numcount}" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">负责人</label>
-            <div class="layui-input-block">
-                <input type="text" name="principal" style="width:300px;" required  lay-verify="required" value="${editLxy.principal}" autocomplete="off" class="layui-input">
+                <input type="text" name="address" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-block">
-                <input type="text" name="phonenum" style="width:300px;" required  lay-verify="required" value="${editLxy.phonenum}" autocomplete="off" class="layui-input">
+                <input type="text" name="phonenum" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">价格(元)</label>
+            <label class="layui-form-label">护照</label>
             <div class="layui-input-block">
-                <input type="text" name="price" style="width:300px;" required  lay-verify="required" value="${editLxy.price}" autocomplete="off" class="layui-input">
+                <input type="text" name="passport" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">利润(元)</label>
+            <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <input type="text" name="profit" style="width:300px;" required  lay-verify="required" value="${editLxy.profit}" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <div class="layui-inline">
-                <label class="layui-form-label">开始日期</label>
-                <div class="layui-input-inline">
-                    <input type="text" class="layui-input"  style="width:300px;" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日" value="${startDate}">
-                </div>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">状态</label>
-            <div class="layui-input-block">
-                <c:if test="${editLxy.status == 1}">
-                    <input type="radio" name="status" value="1" title="已完结" checked>
-                    <input type="radio" name="status" value="0" title="未完结">
-                </c:if>
-                <c:if test="${editLxy.status == 0}">
-                    <input type="radio" name="status" value="1" title="已完结">
-                    <input type="radio" name="status" value="0" title="未完结" checked>
-                </c:if>
+                <input type="text" name="more" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -119,7 +75,7 @@
             var form =new FormData($("#editForm")[0]);     //通过id获取表单的数据
             $.ajax({
                 type:"POST",                             //请求的类型
-                url:"/lxy/editLxy",                      //请求的路径
+                url:"/member/doaddMember",                      //请求的路径
                 data: form,                              //请求的参数
                 async: false,
                 cache: false,

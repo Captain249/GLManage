@@ -49,7 +49,7 @@
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,id:'myTable'
             ,cols: [[
-                {title: '序号', width:'5%',type:'numbers', sort: true}
+                {title: '序号', width:'5%',type:'numbers'}
                 //,{field:'id', width:'5%', title: 'ID', sort: true}
                 ,{field:'grouptype', width:'7%', title: '类别'}
                 ,{field:'name', width:'20%', title: '名称'}
@@ -58,7 +58,7 @@
                 ,{field:'phonenum',width:'12%', title: '联系电话'}
                 ,{field:'startdate',width:'13%', title: '日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
                 ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
-                ,{fixed: 'right', width:'20%', title:'操作', align:'center', toolbar: '#barDemo'}
+                ,{fixed: 'right', width:'21%', title:'操作', align:'center', toolbar: '#barDemo'}
             ]]
             ,page:true
             ,toolbar:'#barDemo2'
@@ -121,6 +121,7 @@
                     offset: 'auto',
                     area: ['500px', '500px'],
                     content: "<%=path%>/lxy/editLxyById?id="+data.id,
+                    offset:"t"
                 });
                 /*//同步更新缓存对应的值
                 obj.update({
@@ -128,14 +129,14 @@
                     ,title: 'xxx'
                 });*/
             } else if(layEvent == 'detailmember'){
-                $("#member", parent.document).attr("lay-href","<%=path%>/lxy/finishlxy?member="+data.id);
+                $("#member", parent.document).attr("lay-href","<%=path%>/member/allmembers?lxyId="+data.id);
                 $("#member", parent.document)[0].click();
-                $("#member", parent.document).attr("lay-href","<%=path%>/lxy/finishlxy?member=0");
-            }else if(layEvent == 'add'){
-                alert(11);
-            }else if(layEvent == 'import'){
-                alert(112);
-            }
+                //$("#member", parent.document).attr("lay-href","<%=path%>/member/allmembers?lxyId=0");
+            }/*else if(layEvent == 'add'){
+                    alert(11);
+                }else if(layEvent == 'import'){
+                    alert(112);
+                }*/
         });
 
         //左上角功能块
@@ -148,6 +149,7 @@
                     offset: 'auto',
                     area: ['500px', '500px'],
                     content: "<%=path%>/lxy/addLxy",
+                    offset:"t"
                 });
             } else if(layEvent === 'import'){ //删除
                 alert(1112);

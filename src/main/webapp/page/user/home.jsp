@@ -96,19 +96,19 @@
                             <dd><a lay-href="<%=path%>/lxy/alllxy">全部展示</a></dd>
                             <dd><a lay-href="<%=path%>/lxy/finishlxy">已完结</a></dd>
                             <dd><a lay-href="<%=path%>/lxy/processlxy">未完结</a></dd>
+                            <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembers?lxyId=0" id="member">全部人员</a></dd>
                         </dl>
                     </li>
-                    <li data-name="template" class="layui-nav-item">
+                   <%-- <li data-name="template" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="人员管理" lay-direction="2">
                             <i class="layui-icon layui-icon-template"></i>
                             <cite>人员管理</cite>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a lay-href="<%=path%>/lxy/finishlxy?member=0" id="member">全部人员</a></dd>
-                            <dd><a lay-href="f.html">家庭成员</a></dd>
-                            <%-- <dd><a href="user/reg.html" target="_blank">注册</a></dd>--%>
+                            <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembers?lxyId=0" id="member">全部人员</a></dd>
+                            <dd><a href="user/reg.html" target="_blank">注册</a></dd>
                         </dl>
-                    </li>
+                    </li>--%>
 
                     <li data-name="set" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="设置" lay-direction="2">

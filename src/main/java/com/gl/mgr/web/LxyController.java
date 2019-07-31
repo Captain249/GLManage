@@ -1,5 +1,6 @@
 package com.gl.mgr.web;
 
+import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.service.LxyService;
 import org.slf4j.Logger;
@@ -52,12 +53,12 @@ public class LxyController {
         if(keyWord != null && keyWord !=""){
             lxy.setName(keyWord);
         }
-        list = lxyService.queryAllLxy(lxy,page,limit);
+        PageInfo<Lxy> pageInfo = lxyService.queryAllLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
-        map.put("data",list);
+        map.put("data",pageInfo.getList());
         map.put("code",0);
         map.put("msg","");
-        map.put("count",list.size());
+        map.put("count",pageInfo.getTotal());
         return map;
     }
 
@@ -101,12 +102,21 @@ public class LxyController {
         Map<String,Object> resutMap = new HashMap<String, Object>();
         Lxy lxy = lxyService.queryLxyById(lxyParam.getId());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String startDate = simpleDateFormat.format(lxy.getStartdate());
-        String html = "<table width='200px'>" +
-                "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"元</span></td></tr>" +
-                "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"元</span></td></tr>" +
-                "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+startDate+"</span></td></tr>"
-                +"</table>";
+        String html = "";
+        if(lxy.getFinishdate()!=null){
+            String finishDate = simpleDateFormat.format(lxy.getFinishdate());
+            html  = "<table width='200px'>" +
+                    "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"元</span></td></tr>" +
+                    "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"元</span></td></tr>" +
+                    "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+finishDate+"</span></td></tr>"
+                    +"</table>";
+        }else{
+             html = "<table width='200px'>" +
+                    "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"元</span></td></tr>" +
+                    "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"元</span></td></tr>" +
+                    "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+"未完结"+"</span></td></tr>"
+                    +"</table>";
+        }
         resutMap.put("html",html);
         return resutMap;
     }
@@ -142,11 +152,6 @@ public class LxyController {
         return true;
     }
 
-    @RequestMapping(value = "inserLxy" , method = RequestMethod.POST)
-    public int inserLxy(Lxy lxyParam){
-        return lxyService.insertLxy(lxyParam);
-    }
-
     @ResponseBody
     @RequestMapping(value = "/doaddLxy", method = RequestMethod.POST)
     public boolean doaddLxy(Lxy lxyParam,String startdateStr) throws ParseException {
@@ -157,4 +162,6 @@ public class LxyController {
         lxyService.insertLxy(lxyParam);
         return true;
     }
+
+
 }

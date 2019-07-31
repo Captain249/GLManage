@@ -27,4 +27,10 @@ public interface MemberMapper {
     int updateByPrimaryKeySelective(Member record);
 
     int updateByPrimaryKey(Member record);
+
+    List<Integer> queryMembersByLxyId (@Param("lxyId") int lxyId);
+
+    int deleteLxyMember(@Param("lxyId")int lxyId,@Param("memberId")int memberId);
+
+    int insertLxyMember(@Param("lxyId")int lxyId,@Param("memberId")int memberId);
 }

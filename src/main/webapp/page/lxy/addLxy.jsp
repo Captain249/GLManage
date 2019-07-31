@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<%=path%>/layuiadmin/layui/css/layui.css" media="all">
 </head>
 <body>
-    <form id="editForm" class="layui-form">
+    <form id="editForm" class="layui-form" autocomplete="off">
         <div class="layui-form-item">
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block" style="width: 300px;">

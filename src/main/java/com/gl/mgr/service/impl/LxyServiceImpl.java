@@ -2,6 +2,7 @@ package com.gl.mgr.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.bean.LxyExample;
 import com.gl.mgr.dao.LxyMapper;
@@ -21,7 +22,7 @@ public class LxyServiceImpl implements LxyService {
     private LxyMapper lxyMapper;
 
     @Override
-    public List<Lxy> queryAllLxy(Lxy checkLxy, int currentPage, int pageLimit) {
+    public PageInfo<Lxy> queryAllLxy(Lxy checkLxy, int currentPage, int pageLimit) {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
@@ -29,7 +30,8 @@ public class LxyServiceImpl implements LxyService {
         }
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
-        return lxyList;
+        PageInfo<Lxy> page = new PageInfo<Lxy>(lxyList, pageLimit);
+        return page;
     }
 
     @Override
