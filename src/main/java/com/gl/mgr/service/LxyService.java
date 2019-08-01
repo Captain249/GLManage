@@ -12,4 +12,5 @@ public interface LxyService {
     int deleteLxyById(Lxy lxy);
     int updateLxyById(Lxy lxy);
     Lxy queryLxyById(int id);
+    int deleteLxyMember(int id);
 }

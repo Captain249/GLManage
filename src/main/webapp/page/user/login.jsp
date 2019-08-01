@@ -39,7 +39,7 @@
             console.log("ajax");
             $.ajax({
                 type:"POST",                             //请求的类型
-                url:"/user/loginCheck",                  //请求的路径
+                url:"<%=path%>/user/loginCheck",                  //请求的路径
                 data: form,                              //请求的参数
                 async: false,
                 cache: false,

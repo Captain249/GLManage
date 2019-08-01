@@ -3,7 +3,7 @@ package com.gl.mgr.web;
 import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Member;
 import com.gl.mgr.service.MemberService;
-import com.gl.util.EncodingTool;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.*;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +44,7 @@ public class MemberController {
         int lid = Integer.parseInt(lxyId);
         Member member = new Member();
         if(keyWord!=null&& !"".equals(keyWord)){
-            member.setName(EncodingTool.encodeStr(keyWord));
+            member.setName(keyWord);
         }
         PageInfo<Member> pageInfo = memberService.queryAllMember(member,lid,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -122,5 +126,53 @@ public class MemberController {
             memberService.insertMember(member,lxyId);
         }
         return true;
+    }
+
+    @RequestMapping(value = "/down2",method = RequestMethod.POST)
+    private void down2(HttpServletRequest request, HttpServletResponse response){
+        try{
+            String path = MemberController.class.getClassLoader().getResource("excelMod.xls").getPath();
+            File file = new File(path);
+            String name = file.getName();//随机获取一个文件，实际中按需编写代码
+            response.addHeader("content-disposition", "attachment;filename="+name);
+            FileUtils.copyFile(file, response.getOutputStream());
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/down")
+    public void down(HttpServletResponse response) {
+        try{
+            String fileName = MemberController.class.getClassLoader().getResource("excelMod.xls").getPath();
+            InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
+            String filename = "excelMod.xls";
+            filename = URLEncoder.encode(filename,"UTF-8");
+            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+            response.setContentType("multipart/form-data");
+            BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
+            int len = 0;
+            while((len = bis.read()) != -1){
+                out.write(len);
+                out.flush();
+            }
+            out.close();
+        }catch (Exception e){
+        }
+    }
+
+    @RequestMapping(value="/download",method=RequestMethod.GET)
+    public void download(HttpServletResponse response) throws IOException {
+        response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode("excelMod.xls", "UTF-8"));
+        String path = MemberController.class.getClassLoader().getResource("excelMod.xls").getPath();
+        FileInputStream in = new FileInputStream(path);
+        OutputStream out = response.getOutputStream();
+        byte buffer[] = new byte[1024];
+        int len = 0;
+        while ((len = in.read(buffer)) > 0) {
+            out.write(buffer, 0, len);
+        }
+        in.close();
+        out.close();
     }
 }

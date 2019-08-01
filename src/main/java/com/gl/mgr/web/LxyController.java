@@ -53,7 +53,7 @@ public class LxyController {
     public Map<String,Object> getalllxy(@RequestParam(value="keyWord", required=false) String keyWord, int page, int limit){
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
-            lxy.setName(EncodingTool.encodeStr(keyWord));
+            lxy.setName(keyWord);
         }
         PageInfo<Lxy> pageInfo = lxyService.queryAllLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -69,7 +69,7 @@ public class LxyController {
     public Map<String,Object> getfinishlxy(@RequestParam(value="keyWord", required=false) String keyWord,int page,int limit){
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
-            lxy.setName(EncodingTool.encodeStr(keyWord));
+            lxy.setName(keyWord);
         }
         PageInfo<Lxy> pageInfo = lxyService.queryFinishLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -85,7 +85,7 @@ public class LxyController {
     public Map<String,Object> getprocesslxy(@RequestParam(value="keyWord", required=false) String keyWord,int page,int limit){
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
-            lxy.setName(EncodingTool.encodeStr(keyWord));
+            lxy.setName(keyWord);
         }
         PageInfo<Lxy> pageInfo = lxyService.queryProcessLxy(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
@@ -124,6 +124,7 @@ public class LxyController {
     @ResponseBody
     @RequestMapping(value = "deleteLxyById" ,method = RequestMethod.POST)
     public boolean deleteLxyById(Lxy lxyParam){
+        lxyService.deleteLxyMember(lxyParam.getId());
         lxyService.deleteLxyById(lxyParam);
         return true;
     }

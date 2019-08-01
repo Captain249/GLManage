@@ -5,7 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.bean.LxyExample;
+import com.gl.mgr.bean.MemberExample;
 import com.gl.mgr.dao.LxyMapper;
+import com.gl.mgr.dao.MemberMapper;
 import com.gl.mgr.service.LxyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,8 @@ import java.util.List;
 public class LxyServiceImpl implements LxyService {
     @Autowired
     private LxyMapper lxyMapper;
+    @Autowired
+    private MemberMapper memberMapper;
 
     @Override
     public PageInfo<Lxy> queryAllLxy(Lxy checkLxy, int currentPage, int pageLimit) {
@@ -95,5 +99,16 @@ public class LxyServiceImpl implements LxyService {
     @Override
     public Lxy queryLxyById(int id) {
         return lxyMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteLxyMember(int id) {
+        List<Integer> memberIds = memberMapper.queryMembersByLxyId(id);
+        if(!memberIds.isEmpty()){
+            MemberExample example = new MemberExample();
+            example.createCriteria().andIdIn(memberIds);
+            memberMapper.deleteByExample(example);
+        }
+        return lxyMapper.deleteLxyMember(id);
     }
 }

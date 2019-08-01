@@ -29,4 +29,6 @@ public interface LxyMapper {
     int updateByPrimaryKeySelective(Lxy record);
 
     int updateByPrimaryKey(Lxy record);
+
+    int deleteLxyMember(int lxyId);
 }

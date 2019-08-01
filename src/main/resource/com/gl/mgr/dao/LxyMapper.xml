@@ -320,4 +320,7 @@
       more = #{more,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteLxyMember" parameterType="java.lang.Integer">
+      delete from lxy_member where lxyId = #{lxyId}
+  </delete>
 </mapper>

@@ -94,7 +94,7 @@
             var form =new FormData($("#editForm")[0]);     //通过id获取表单的数据
             $.ajax({
                 type:"POST",                             //请求的类型
-                url:"/lxy/doaddLxy",                      //请求的路径
+                url:"<%=path %>/lxy/doaddLxy",                      //请求的路径
                 data: form,                              //请求的参数
                 async: false,
                 cache: false,

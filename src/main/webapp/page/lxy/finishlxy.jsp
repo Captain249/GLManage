@@ -117,7 +117,7 @@
                 var index = layer.open({
                     title: "编辑",
                     type: 2,
-                    offset: 'auto',
+                    offset: 't',
                     area: ['500px', '500px'],
                     content: "<%=path%>/lxy/editLxyById?id="+data.id,
                     offset:"t"
@@ -145,7 +145,7 @@
                 var index = layer.open({
                     title: "新增",
                     type: 2,
-                    offset: 'auto',
+                    offset: 't',
                     area: ['500px', '500px'],
                     content: "<%=path%>/lxy/addLxy",
                     offset:"t"

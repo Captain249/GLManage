@@ -28,6 +28,7 @@
 
     <%--左上角功能块--%>
     <script type="text/html" id="barDemo2">
+        <a class="layui-btn layui-btn-xs" href="<%=path%>/member/download">下载模板</a>
         <a class="layui-btn layui-btn-xs" lay-event="add">增加</a>
         <a class="layui-btn layui-btn-xs" lay-event="import" id="import">导入</a>
     </script>
@@ -115,7 +116,7 @@
                     var index = layer.open({
                         title: "编辑",
                         type: 2,
-                        offset: 'auto',
+                        offset: 't',
                         area: ['500px', '450px'],
                         content: "<%=path%>/member/editMemberById?id="+data.id,
                     });
@@ -129,20 +130,18 @@
                     var index = layer.open({
                         title: "新增",
                         type: 2,
-                        offset: 'auto',
+                        offset: 't',
                         area: ['500px', '450px'],
                         content: "<%=path%>/member/addMember",
                     });
-                } /*else if(layEvent === 'import'){
-                    alert(1112);
-                }*/
+                }
             });
 
             var upload = layui.upload;
             //执行实例
             var uploadInst = upload.render({
                 elem: '#import' //绑定元素
-                ,url: '/member/excelUp' //上传接口
+                ,url: '<%=path %>/member/excelUp' //上传接口
                 ,accept: 'file'
                 ,done: function(res){
                     window.location.reload();
