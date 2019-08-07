@@ -3,7 +3,6 @@ package com.gl.mgr.web;
 import com.github.pagehelper.PageInfo;
 import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.service.LxyService;
-import com.gl.util.EncodingTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,8 @@ import java.util.Map;
 @Controller
 @RequestMapping("lxy")
 public class LxyController {
-    private static Logger log=LoggerFactory.getLogger(LxyController.class);
+
+    private static Logger log = LoggerFactory.getLogger(LxyController.class);
 
     @Autowired
     private LxyService lxyService;
@@ -165,6 +165,4 @@ public class LxyController {
         lxyService.insertLxy(lxyParam);
         return true;
     }
-
-
 }

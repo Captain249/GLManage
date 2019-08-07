@@ -128,39 +128,6 @@ public class MemberController {
         return true;
     }
 
-    @RequestMapping(value = "/down2",method = RequestMethod.POST)
-    private void down2(HttpServletRequest request, HttpServletResponse response){
-        try{
-            String path = MemberController.class.getClassLoader().getResource("excelMod.xls").getPath();
-            File file = new File(path);
-            String name = file.getName();//随机获取一个文件，实际中按需编写代码
-            response.addHeader("content-disposition", "attachment;filename="+name);
-            FileUtils.copyFile(file, response.getOutputStream());
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @RequestMapping("/down")
-    public void down(HttpServletResponse response) {
-        try{
-            String fileName = MemberController.class.getClassLoader().getResource("excelMod.xls").getPath();
-            InputStream bis = new BufferedInputStream(new FileInputStream(new File(fileName)));
-            String filename = "excelMod.xls";
-            filename = URLEncoder.encode(filename,"UTF-8");
-            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-            response.setContentType("multipart/form-data");
-            BufferedOutputStream out = new BufferedOutputStream(response.getOutputStream());
-            int len = 0;
-            while((len = bis.read()) != -1){
-                out.write(len);
-                out.flush();
-            }
-            out.close();
-        }catch (Exception e){
-        }
-    }
-
     @RequestMapping(value="/download",method=RequestMethod.GET)
     public void download(HttpServletResponse response) throws IOException {
         response.setHeader("content-disposition", "attachment;filename=" + URLEncoder.encode("excelMod.xls", "UTF-8"));
