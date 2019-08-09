@@ -96,6 +96,18 @@
                             <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembers?lxyId=0" id="member">全部人员</a></dd>
                         </dl>
                     </li>
+                    <li data-name="component" class="layui-nav-item">
+                        <a href="javascript:;" lay-tips="散客管理" lay-direction="2">
+                            <i class="layui-icon layui-icon-component"></i>
+                            <cite>散客管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a lay-href="<%=path%>/scattered/gognhk">国内航空线</a></dd>
+                            <dd><a lay-href="<%=path%>/scattered/gocj">出境</a></dd>
+                            <dd><a lay-href="<%=path%>/scattered/godx">短线</a></dd>
+                            <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembersScattered?scatteredId=0" id="member2">全部人员</a></dd>
+                        </dl>
+                    </li>
                    <%-- <li data-name="template" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="人员管理" lay-direction="2">
                             <i class="layui-icon layui-icon-template"></i>

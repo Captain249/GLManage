@@ -38,6 +38,30 @@ public class MemberController {
         return "member/members";
     }
 
+    @RequestMapping("allmembersScattered")
+    public String allmembersScattered(@RequestParam(value="scatteredId", required=true) String scatteredId,Model model){
+        model.addAttribute("scatteredId",scatteredId);
+        return "member/membersScattered";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "queryAllMemberScattered",method = RequestMethod.GET)
+    public  Map<String,Object> queryAllMemberScattered (@RequestParam(value="scatteredId", required=true) String scatteredId, @RequestParam(value="keyWord", required=false) String keyWord, int page, int limit, HttpSession session){
+        int sid = Integer.parseInt(scatteredId);
+        Member member = new Member();
+        if(keyWord!=null&& !"".equals(keyWord)){
+            member.setName(keyWord);
+        }
+        PageInfo<Member> pageInfo = memberService.queryAllMemberScattered(member,sid,page,limit);
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("data",pageInfo.getList());
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",pageInfo.getTotal());
+        session.setAttribute("scatteredId",sid);
+        return map;
+    }
+
     @ResponseBody
     @RequestMapping(value = "queryAllMember",method = RequestMethod.GET)
     public  Map<String,Object> queryAllMember (@RequestParam(value="lxyId", required=true) String lxyId, @RequestParam(value="keyWord", required=false) String keyWord, int page, int limit, HttpSession session){
@@ -86,6 +110,14 @@ public class MemberController {
         return true;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "deleteMemberByIdScattered" ,method = RequestMethod.POST)
+    public boolean deleteMemberByIdScattered(Member member,HttpSession session){
+        int scatteredId =(Integer) session.getAttribute("scatteredId");
+        memberService.deleteMemberByIdScattered(member.getId(),scatteredId);
+        return true;
+    }
+
     @RequestMapping(value = "editMemberById" ,method = RequestMethod.GET)
     public String editLxyById(Member memberParam,Model model){
         Member member = memberService.queryMemberById(memberParam.getId());
@@ -105,11 +137,24 @@ public class MemberController {
         return "member/addMember";
     }
 
+    @RequestMapping(value = "addMemberScattered" ,method = RequestMethod.GET)
+    public String addMemberScattered(){
+        return "member/addMemberScattered";
+    }
+
     @ResponseBody
     @RequestMapping(value = "/doaddMember", method = RequestMethod.POST)
     public boolean doaddMember(Member memberParam,HttpSession session) {
         int lxyId = (Integer) session.getAttribute("lxyId");
         memberService.insertMember(memberParam,lxyId);
+        return true;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/doaddMemberScattered", method = RequestMethod.POST)
+    public boolean doaddMemberScattered(Member memberParam,HttpSession session) {
+        int scatteredId = (Integer) session.getAttribute("scatteredId");
+        memberService.insertMemberScattered(memberParam,scatteredId);
         return true;
     }
 
@@ -124,6 +169,21 @@ public class MemberController {
         for(int i=0;i<memberList.size();i++){
             Member member = memberList.get(i);
             memberService.insertMember(member,lxyId);
+        }
+        return true;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/excelUp2",method = RequestMethod.POST)
+    public boolean excelUp2(MultipartFile file,HttpSession session){
+        int scatteredId =(Integer) session.getAttribute("scatteredId");
+        List<Member> memberList = memberService.excelUp(file);
+        if(memberList.isEmpty()){
+            return false;
+        }
+        for(int i=0;i<memberList.size();i++){
+            Member member = memberList.get(i);
+            memberService.insertMemberScattered(member,scatteredId);
         }
         return true;
     }

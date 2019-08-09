@@ -71,7 +71,7 @@ public class LxyServiceImpl implements LxyService {
         LxyExample example = new LxyExample();
         LxyExample.Criteria criteria = example.createCriteria();
         if(lxy.getName()!=null&&!"".equals(lxy.getName())){
-            criteria.andNameLike(lxy.getName());
+            criteria.andNameLike("%"+lxy.getName()+"%");
         }
         criteria.andIdEqualTo(lxy.getId());
         List<Lxy> lxyList = lxyMapper.selectByExample(example);

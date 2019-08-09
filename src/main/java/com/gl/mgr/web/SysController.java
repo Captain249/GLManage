@@ -5,12 +5,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("sys")
@@ -37,6 +39,18 @@ public class SysController {
         Map<String,Object> map = new HashMap<>();
         map.put("list1",list1);
         map.put("list2",list2);
+        return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "testFile",method = RequestMethod.POST)
+    public Map<String,String> testFile(@RequestParam ("file")MultipartFile file) throws IOException {
+        String type = file.getOriginalFilename().substring(file.getOriginalFilename().indexOf("."));
+        long startName = System.currentTimeMillis();
+        File file1 = new File("/home/tomcat/temp/"+startName+type);
+        file.transferTo(file1);
+        Map<String,String> map = new HashMap<>();
+        map.put("msg","success");
         return map;
     }
 }

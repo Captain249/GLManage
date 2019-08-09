@@ -31,7 +31,7 @@
 </div>
 <div class="layui-row">
     <div class="layui-col-xs3">
-        <div class="grid-demo grid-demo-bg1">3/12</div>
+        <div class="grid-demo grid-demo-bg1">测试阶段</div>
     </div>
     <div class="layui-col-xs3">
         <div class="grid-demo">3/12</div>

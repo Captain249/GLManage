@@ -249,4 +249,14 @@
   <insert id="insertLxyMember">
       insert into lxy_member (lxyId,memberId) values (#{lxyId},#{memberId})
   </insert>
+
+  <select id="queryMembersByScatteredId" resultType="java.lang.Integer">
+      select memberId from scattered_member where scatteredId = #{scatteredId}
+  </select>
+  <delete id="deleteScatteredMember">
+      delete from scattered_member where scatteredId = #{scatteredId} and memberId = #{memberId}
+  </delete>
+  <insert id="insertScatteredMember">
+      insert into scattered_member (scatteredId,memberId) values (#{scatteredId},#{memberId})
+  </insert>
 </mapper>

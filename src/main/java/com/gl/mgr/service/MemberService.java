@@ -12,4 +12,8 @@ public interface MemberService {
     int deleteMemberById(int memberId,int lxyId);
     int updateMemberById(Member member);
     List<Member> excelUp(MultipartFile file);
+    PageInfo<Member> queryAllMemberScattered(Member checkMember,int scatteredId, int currentPage, int pageLimit);
+    int insertMemberScattered(Member member,int scatteredId);
+    int deleteMemberByIdScattered(int memberId,int scatteredId);
+
 }

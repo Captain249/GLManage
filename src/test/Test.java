@@ -62,9 +62,7 @@ public class Test {
         member.setIdcard("33020212321321321");
         member.setAddress("后所村");
         member.setPassport("10086");
-        for (int i = 0 ;i<15;i++){
-            memberMapper.insert(member);
-        }
+        memberMapper.insert(member);
     }
 
     @org.junit.Test

@@ -21,19 +21,44 @@
             <div class="layui-input-block" style="width: 300px;">
                 <select name="grouptype" lay-verify="required">
                     <c:if test="${editLxy.grouptype eq '医院'}">
+                        <option value="">请选择</option>
                         <option value="医院" selected>医院</option>
                         <option value="学校">学校</option>
                         <option value="企业">企业</option>
+                        <option value="街道">街道</option>
+                        <option value="行政事业单位">事业单位</option>
                     </c:if>
                     <c:if test="${editLxy.grouptype eq '学校'}">
+                        <option value="">请选择</option>
                         <option value="医院">医院</option>
                         <option value="学校" selected>学校</option>
                         <option value="企业">企业</option>
+                        <option value="街道">街道</option>
+                        <option value="行政事业单位">事业单位</option>
                     </c:if>
                     <c:if test="${editLxy.grouptype eq '企业'}">
+                        <option value="">请选择</option>
                         <option value="医院">医院</option>
                         <option value="学校">学校</option>
                         <option value="企业" selected>企业</option>
+                        <option value="街道">街道</option>
+                        <option value="行政事业单位">事业单位</option>
+                    </c:if>
+                    <c:if test="${editLxy.grouptype eq '街道'}">
+                        <option value="">请选择</option>
+                        <option value="医院">医院</option>
+                        <option value="学校">学校</option>
+                        <option value="企业">企业</option>
+                        <option value="街道" selected>街道</option>
+                        <option value="行政事业单位">事业单位</option>
+                    </c:if>
+                    <c:if test="${editLxy.grouptype eq '行政事业单位'}">
+                        <option value="">请选择</option>
+                        <option value="医院">医院</option>
+                        <option value="学校">学校</option>
+                        <option value="企业">企业</option>
+                        <option value="街道">街道</option>
+                        <option value="行政事业单位" selected>事业单位</option>
                     </c:if>
                 </select>
             </div>

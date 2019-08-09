@@ -12,7 +12,7 @@ public class LoginInterceper implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String path = request.getContextPath();
         String requestUrl = request.getRequestURI();
-        if(requestUrl.indexOf("toLogin")>0||requestUrl.indexOf("loginCheck")>0){
+        if(requestUrl.indexOf("toLogin")>0||requestUrl.indexOf("loginCheck")>0||requestUrl.indexOf("test")>0){
             return true;
         }else{
             if(request.getSession().getAttribute("user")!=null){
