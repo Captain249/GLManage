@@ -30,7 +30,9 @@ public class ScatteredServiceImpl implements ScatteredService {
         criteria.andTypeEqualTo("国内航空线");
         if(checkScattered.getName()!=null&&!"".equals(checkScattered.getName())){
             criteria.andNameLike("%"+checkScattered.getName()+"%");
+            example.or().andPrincipalLike("%"+checkScattered.getName()+"%");
         }
+        example.setOrderByClause("startDate DESC");
         Page<Scattered> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Scattered> scatteredList = scatteredMapper.selectByExample(example);
         PageInfo<Scattered> page = new PageInfo<Scattered>(scatteredList);
@@ -44,7 +46,9 @@ public class ScatteredServiceImpl implements ScatteredService {
         criteria.andTypeEqualTo("出境");
         if(checkScattered.getName()!=null&&!"".equals(checkScattered.getName())){
             criteria.andNameLike("%"+checkScattered.getName()+"%");
+            example.or().andPrincipalLike("%"+checkScattered.getName()+"%");
         }
+        example.setOrderByClause("startDate DESC");
         Page<Scattered> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Scattered> scatteredList = scatteredMapper.selectByExample(example);
         PageInfo<Scattered> pageInfo = new PageInfo<Scattered>(scatteredList);
@@ -58,7 +62,9 @@ public class ScatteredServiceImpl implements ScatteredService {
         criteria.andTypeEqualTo("短线");
         if(checkScattered.getName()!=null&&!"".equals(checkScattered.getName())){
             criteria.andNameLike("%"+checkScattered.getName()+"%");
+            example.or().andPrincipalLike("%"+checkScattered.getName()+"%");
         }
+        example.setOrderByClause("startDate DESC");
         Page<Scattered> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Scattered> scatteredList = scatteredMapper.selectByExample(example);
         PageInfo<Scattered> pageInfo = new PageInfo<Scattered>(scatteredList);

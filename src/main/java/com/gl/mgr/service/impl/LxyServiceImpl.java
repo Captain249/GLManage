@@ -20,6 +20,7 @@ import java.util.List;
 @Service
 @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT)
 public class LxyServiceImpl implements LxyService {
+
     @Autowired
     private LxyMapper lxyMapper;
     @Autowired
@@ -31,7 +32,9 @@ public class LxyServiceImpl implements LxyService {
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
             criteria.andNameLike("%"+checkLxy.getName()+"%");
+            example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
         }
+        example.setOrderByClause("startDate DESC");
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
         PageInfo<Lxy> page = new PageInfo<Lxy>(lxyList);
@@ -44,7 +47,9 @@ public class LxyServiceImpl implements LxyService {
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
             criteria.andNameLike("%"+checkLxy.getName()+"%");
+            example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
         }
+        example.setOrderByClause("startDate DESC");
         criteria.andStatusEqualTo(1);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
@@ -58,7 +63,9 @@ public class LxyServiceImpl implements LxyService {
         LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
             criteria.andNameLike("%"+checkLxy.getName()+"%");
+            example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
         }
+        example.setOrderByClause("startDate DESC");
         criteria.andStatusEqualTo(0);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);

@@ -160,9 +160,9 @@
 
 <script type="text/html" id="stateTpl">
     {{# if(d.status==0){ }}
-    未完结
+    <p style="color: #dd3e3e">未完结</p>
     {{#  } else { }}
-    已完结
+    <p>已完结</p>
     {{#  } }}
 </script>
 
