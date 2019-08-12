@@ -20,12 +20,12 @@
     <div class="layui-col-xs6">
         <div class="grid-demo grid-demo-bg1">
             <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
-            <div id="main" style="width: 100%;height:400px;"></div>
+            <div id="main" style="width: 100%;height:60%;"></div>
         </div>
     </div>
     <div class="layui-col-xs6">
         <div class="grid-demo">
-            <div id="main2" style="width: 100%;height:400px;"></div>
+            <div id="main2" style="width: 100%;height:60%;"></div>
         </div>
     </div>
 </div>

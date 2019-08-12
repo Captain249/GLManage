@@ -55,11 +55,11 @@
                 ,{field:'phonenum', width:'15%', title: '手机号'}
                 ,{field:'num', width:'7%', title: '人数'}
                 ,{field:'name',width:'20%', title: '行程'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-               /* ,{field:'receivable',width:'5%', title: '应收款'}
+          /*      ,{field:'receivable',width:'5%', title: '应收款'}
                 ,{field:'received',width:'5%', title: '实收款'}
-                ,{field:'b2b',width:'5%', title: 'b2b报名'}*/
-                /*,{field:'salesroom',width:'5%', title: '门市'}*/
-               /* ,{field:'contract',width:'7%', title: '合同'}
+                ,{field:'b2b',width:'5%', title: 'b2b报名'}
+                ,{field:'salesroom',width:'5%', title: '门市'}
+                ,{field:'contract',width:'7%', title: '合同'}
                 ,{field:'invoice',width:'7%', title: '发票抬头'}*/
                 ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
                 ,{fixed: 'right', width:'21%', title:'操作', align:'center', toolbar: '#barDemo'}
