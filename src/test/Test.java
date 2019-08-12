@@ -47,8 +47,6 @@ public class Test {
         lxy.setName("后所一日游");
         lxy.setStartdate(startD);
         lxy.setFinishdate(endD);
-        lxy.setPrice(new BigDecimal(2000.5));
-        lxy.setProfit(new BigDecimal(200.5));
         lxy.setStatus(0);
         int a = lxyMapper.insert(lxy);
         System.out.println(a);

@@ -105,15 +105,25 @@ public class LxyController {
         String html = "";
         if(lxy.getFinishdate()!=null){
             String finishDate = simpleDateFormat.format(lxy.getFinishdate());
-            html  = "<table width='200px'>" +
-                    "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"元</span></td></tr>" +
-                    "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"元</span></td></tr>" +
+            html  = "<table width='250px'>" +
+                    "<tr><td align='right'>应收款:&nbsp;</td><td><span align='left'>"+lxy.getReceivable()+"元</span></td></tr>" +
+                    "<tr><td align='right'>实收款:&nbsp;</td><td><span align='left'>"+lxy.getReceived()+"元</span></td></tr>" +
+                    "<tr><td align='right'>b2b报名:&nbsp;</td><td><span align='left'>"+lxy.getB2b()+"元</span></td></tr>" +
+                    "<tr><td align='right'>门市:&nbsp;</td><td><span align='left'>"+lxy.getSalesroom()+"</span></td></tr>" +
+                    "<tr><td align='right'>合同:&nbsp;</td><td><span align='left'>"+lxy.getContract()+"</span></td></tr>" +
+                    "<tr><td align='right'>发票抬头:&nbsp;</td><td><span align='left'>"+lxy.getInvoice()+"</span></td></tr>" +
+                    "<tr><td align='right'>备注:&nbsp;</td><td><span align='left'>"+lxy.getMore()+"</span></td></tr>" +
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+finishDate+"</span></td></tr>"
                     +"</table>";
         }else{
-             html = "<table width='200px'>" +
-                    "<tr><td align='right'>价格:&nbsp;</td><td><span align='left'>"+lxy.getPrice()+"元</span></td></tr>" +
-                    "<tr><td align='right'>利润:&nbsp;</td><td><span align='left'>"+lxy.getProfit()+"元</span></td></tr>" +
+             html = "<table width='250px'>" +
+                     "<tr><td align='right'>应收款:&nbsp;</td><td><span align='left'>"+lxy.getReceivable()+"元</span></td></tr>" +
+                     "<tr><td align='right'>实收款:&nbsp;</td><td><span align='left'>"+lxy.getReceived()+"元</span></td></tr>" +
+                     "<tr><td align='right'>b2b报名:&nbsp;</td><td><span align='left'>"+lxy.getB2b()+"元</span></td></tr>" +
+                     "<tr><td align='right'>门市:&nbsp;</td><td><span align='left'>"+lxy.getSalesroom()+"</span></td></tr>" +
+                     "<tr><td align='right'>合同:&nbsp;</td><td><span align='left'>"+lxy.getContract()+"</span></td></tr>" +
+                     "<tr><td align='right'>发票抬头:&nbsp;</td><td><span align='left'>"+lxy.getInvoice()+"</span></td></tr>" +
+                     "<tr><td align='right'>备注:&nbsp;</td><td><span align='left'>"+lxy.getMore()+"</span></td></tr>" +
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+"未完结"+"</span></td></tr>"
                     +"</table>";
         }

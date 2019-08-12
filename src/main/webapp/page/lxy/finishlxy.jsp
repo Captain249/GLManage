@@ -44,20 +44,26 @@
         table.render({
             elem: '#lxyTable'
             ,url:'<%=path %>/lxy/getfinishlxy'
-            // ,type:'post'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,cellMinWidth: 50 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,id:'myTable'
+            ,method:'post'
             ,cols: [[
                 {title: '序号', width:'5%',type:'numbers'}
                 //,{field:'id', width:'5%', title: 'ID', sort: true}
-                ,{field:'grouptype', width:'7%', title: '类别'}
-                ,{field:'name', width:'20%', title: '名称'}
-                ,{field:'numcount', width:'7%', title: '人数'}
-                ,{field:'principal',width:'8%', title: '负责人'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                ,{field:'phonenum',width:'12%', title: '联系电话'}
-                ,{field:'startdate',width:'13%', title: '日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
+                ,{field:'startdate', width:'10%', title: '出发日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
+                ,{field:'gname', width:'10%', title: '单位名'}
+                ,{field:'principal', width:'10%', title: '负责人'}
+                ,{field:'phonenum', width:'10%', title: '手机号'}
+                ,{field:'numcount', width:'5%', title: '人数'}
+                ,{field:'name',width:'20%', title: '行程'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                /*      ,{field:'receivable',width:'5%', title: '应收款'}
+                      ,{field:'received',width:'5%', title: '实收款'}
+                      ,{field:'b2b',width:'5%', title: 'b2b报名'}
+                      ,{field:'salesroom',width:'5%', title: '门市'}
+                      ,{field:'contract',width:'7%', title: '合同'}
+                      ,{field:'invoice',width:'7%', title: '发票抬头'}*/
                 ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
-                ,{fixed: 'right', width:'21%', title:'操作', align:'center', toolbar: '#barDemo'}
+                ,{fixed: 'right', width:'18%', title:'操作', align:'center', toolbar: '#barDemo'}
             ]]
             ,page:true
             ,toolbar:'#barDemo2'
@@ -92,7 +98,7 @@
                     success: function (data) {
                         layer.open({
                             title:'查看详情',
-                            area:['200px','200px'],
+                            area:['300px','300px'],
                             shade: 0.4,
                             content: data.html,
                         })

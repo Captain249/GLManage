@@ -33,6 +33,7 @@ public class LxyServiceImpl implements LxyService {
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
             criteria.andNameLike("%"+checkLxy.getName()+"%");
             example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
+            example.or().andGnameLike("%"+checkLxy.getName()+"%");
         }
         example.setOrderByClause("startDate DESC");
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
@@ -48,6 +49,7 @@ public class LxyServiceImpl implements LxyService {
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
             criteria.andNameLike("%"+checkLxy.getName()+"%");
             example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
+            example.or().andGnameLike("%"+checkLxy.getName()+"%");
         }
         example.setOrderByClause("startDate DESC");
         criteria.andStatusEqualTo(1);
@@ -64,6 +66,7 @@ public class LxyServiceImpl implements LxyService {
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
             criteria.andNameLike("%"+checkLxy.getName()+"%");
             example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
+            example.or().andGnameLike("%"+checkLxy.getName()+"%");
         }
         example.setOrderByClause("startDate DESC");
         criteria.andStatusEqualTo(0);

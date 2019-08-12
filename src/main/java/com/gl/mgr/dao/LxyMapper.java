@@ -4,9 +4,7 @@ import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.bean.LxyExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface LxyMapper {
     int countByExample(LxyExample example);
 

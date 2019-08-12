@@ -106,7 +106,7 @@ public class ScatteredController {
         String html = "";
         if(scattered.getEnddate()!=null){
             String finishDate = simpleDateFormat.format(scattered.getEnddate());
-            html  = "<table width='200px'>" +
+            html  = "<table width='250px'>" +
                     "<tr><td align='right'>应收款:&nbsp;</td><td><span align='left'>"+scattered.getReceivable()+"元</span></td></tr>" +
                     "<tr><td align='right'>实收款:&nbsp;</td><td><span align='left'>"+scattered.getReceived()+"元</span></td></tr>" +
                     "<tr><td align='right'>b2b报名:&nbsp;</td><td><span align='left'>"+scattered.getB2b()+"元</span></td></tr>" +
@@ -117,7 +117,7 @@ public class ScatteredController {
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+finishDate+"</span></td></tr>"
                     +"</table>";
         }else{
-            html = "<table width='200px'>" +
+            html = "<table width='250px'>" +
                     "<tr><td align='right'>应收款:&nbsp;</td><td><span align='left'>"+scattered.getReceivable()+"元</span></td></tr>" +
                     "<tr><td align='right'>实收款:&nbsp;</td><td><span align='left'>"+scattered.getReceived()+"元</span></td></tr>" +
                     "<tr><td align='right'>b2b报名:&nbsp;</td><td><span align='left'>"+scattered.getB2b()+"元</span></td></tr>" +

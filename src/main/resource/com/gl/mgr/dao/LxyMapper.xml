@@ -3,17 +3,23 @@
 <mapper namespace="com.gl.mgr.dao.LxyMapper" >
   <resultMap id="BaseResultMap" type="com.gl.mgr.bean.Lxy" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="grouptype" property="grouptype" jdbcType="VARCHAR" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="numcount" property="numcount" jdbcType="INTEGER" />
-    <result column="principal" property="principal" jdbcType="VARCHAR" />
-    <result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="profit" property="profit" jdbcType="DECIMAL" />
     <result column="startDate" property="startdate" jdbcType="DATE" />
+    <result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
+    <result column="numcount" property="numcount" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="receivable" property="receivable" jdbcType="DECIMAL" />
+    <result column="received" property="received" jdbcType="DECIMAL" />
+    <result column="b2b" property="b2b" jdbcType="DECIMAL" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="salesroom" property="salesroom" jdbcType="VARCHAR" />
+    <result column="contract" property="contract" jdbcType="VARCHAR" />
+    <result column="invoice" property="invoice" jdbcType="VARCHAR" />
     <result column="finishDate" property="finishdate" jdbcType="DATE" />
-    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
     <result column="more" property="more" jdbcType="VARCHAR" />
+    <result column="grouptype" property="grouptype" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="gname" property="gname" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -74,8 +80,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, grouptype, name, numcount, principal, phonenum, price, profit, startDate, finishDate, 
-    status, more
+    id, startDate, phonenum, numcount, name, receivable, received, b2b, operator, salesroom, 
+    contract, invoice, finishDate, principal, more, grouptype, status, gname
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gl.mgr.bean.LxyExample" >
     select
@@ -108,15 +114,19 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.gl.mgr.bean.Lxy" >
-    insert into lxy (id, grouptype, name, 
-      numcount, principal, phonenum, 
-      price, profit, startDate, 
-      finishDate, status, more
+    insert into lxy (id, startDate, phonenum, 
+      numcount, name, receivable, 
+      received, b2b, operator, 
+      salesroom, contract, invoice, 
+      finishDate, principal, more, 
+      grouptype, status, gname
       )
-    values (#{id,jdbcType=INTEGER}, #{grouptype,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{numcount,jdbcType=INTEGER}, #{principal,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DECIMAL}, #{profit,jdbcType=DECIMAL}, #{startdate,jdbcType=DATE}, 
-      #{finishdate,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{more,jdbcType=VARCHAR}
+    values (#{id,jdbcType=INTEGER}, #{startdate,jdbcType=DATE}, #{phonenum,jdbcType=VARCHAR}, 
+      #{numcount,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{receivable,jdbcType=DECIMAL}, 
+      #{received,jdbcType=DECIMAL}, #{b2b,jdbcType=DECIMAL}, #{operator,jdbcType=VARCHAR}, 
+      #{salesroom,jdbcType=VARCHAR}, #{contract,jdbcType=VARCHAR}, #{invoice,jdbcType=VARCHAR}, 
+      #{finishdate,jdbcType=DATE}, #{principal,jdbcType=VARCHAR}, #{more,jdbcType=VARCHAR}, 
+      #{grouptype,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{gname,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.gl.mgr.bean.Lxy" >
@@ -125,76 +135,112 @@
       <if test="id != null" >
         id,
       </if>
-      <if test="grouptype != null" >
-        grouptype,
-      </if>
-      <if test="name != null" >
-        name,
-      </if>
-      <if test="numcount != null" >
-        numcount,
-      </if>
-      <if test="principal != null" >
-        principal,
+      <if test="startdate != null" >
+        startDate,
       </if>
       <if test="phonenum != null" >
         phonenum,
       </if>
-      <if test="price != null" >
-        price,
+      <if test="numcount != null" >
+        numcount,
       </if>
-      <if test="profit != null" >
-        profit,
+      <if test="name != null" >
+        name,
       </if>
-      <if test="startdate != null" >
-        startDate,
+      <if test="receivable != null" >
+        receivable,
+      </if>
+      <if test="received != null" >
+        received,
+      </if>
+      <if test="b2b != null" >
+        b2b,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="salesroom != null" >
+        salesroom,
+      </if>
+      <if test="contract != null" >
+        contract,
+      </if>
+      <if test="invoice != null" >
+        invoice,
       </if>
       <if test="finishdate != null" >
         finishDate,
       </if>
-      <if test="status != null" >
-        status,
+      <if test="principal != null" >
+        principal,
       </if>
       <if test="more != null" >
         more,
+      </if>
+      <if test="grouptype != null" >
+        grouptype,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gname != null" >
+        gname,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="grouptype != null" >
-        #{grouptype,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="numcount != null" >
-        #{numcount,jdbcType=INTEGER},
-      </if>
-      <if test="principal != null" >
-        #{principal,jdbcType=VARCHAR},
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
       </if>
       <if test="phonenum != null" >
         #{phonenum,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
+      <if test="numcount != null" >
+        #{numcount,jdbcType=INTEGER},
       </if>
-      <if test="profit != null" >
-        #{profit,jdbcType=DECIMAL},
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
       </if>
-      <if test="startdate != null" >
-        #{startdate,jdbcType=DATE},
+      <if test="receivable != null" >
+        #{receivable,jdbcType=DECIMAL},
+      </if>
+      <if test="received != null" >
+        #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="b2b != null" >
+        #{b2b,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="salesroom != null" >
+        #{salesroom,jdbcType=VARCHAR},
+      </if>
+      <if test="contract != null" >
+        #{contract,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        #{invoice,jdbcType=VARCHAR},
       </if>
       <if test="finishdate != null" >
         #{finishdate,jdbcType=DATE},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=INTEGER},
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
       </if>
       <if test="more != null" >
         #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="grouptype != null" >
+        #{grouptype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        #{gname,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -210,38 +256,56 @@
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.grouptype != null" >
-        grouptype = #{record.grouptype,jdbcType=VARCHAR},
-      </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
-      </if>
-      <if test="record.numcount != null" >
-        numcount = #{record.numcount,jdbcType=INTEGER},
-      </if>
-      <if test="record.principal != null" >
-        principal = #{record.principal,jdbcType=VARCHAR},
+      <if test="record.startdate != null" >
+        startDate = #{record.startdate,jdbcType=DATE},
       </if>
       <if test="record.phonenum != null" >
         phonenum = #{record.phonenum,jdbcType=VARCHAR},
       </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=DECIMAL},
+      <if test="record.numcount != null" >
+        numcount = #{record.numcount,jdbcType=INTEGER},
       </if>
-      <if test="record.profit != null" >
-        profit = #{record.profit,jdbcType=DECIMAL},
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.startdate != null" >
-        startDate = #{record.startdate,jdbcType=DATE},
+      <if test="record.receivable != null" >
+        receivable = #{record.receivable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.received != null" >
+        received = #{record.received,jdbcType=DECIMAL},
+      </if>
+      <if test="record.b2b != null" >
+        b2b = #{record.b2b,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesroom != null" >
+        salesroom = #{record.salesroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contract != null" >
+        contract = #{record.contract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoice != null" >
+        invoice = #{record.invoice,jdbcType=VARCHAR},
       </if>
       <if test="record.finishdate != null" >
         finishDate = #{record.finishdate,jdbcType=DATE},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=INTEGER},
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
       </if>
       <if test="record.more != null" >
         more = #{record.more,jdbcType=VARCHAR},
+      </if>
+      <if test="record.grouptype != null" >
+        grouptype = #{record.grouptype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.gname != null" >
+        gname = #{record.gname,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -251,17 +315,23 @@
   <update id="updateByExample" parameterType="map" >
     update lxy
     set id = #{record.id,jdbcType=INTEGER},
-      grouptype = #{record.grouptype,jdbcType=VARCHAR},
-      name = #{record.name,jdbcType=VARCHAR},
-      numcount = #{record.numcount,jdbcType=INTEGER},
-      principal = #{record.principal,jdbcType=VARCHAR},
-      phonenum = #{record.phonenum,jdbcType=VARCHAR},
-      price = #{record.price,jdbcType=DECIMAL},
-      profit = #{record.profit,jdbcType=DECIMAL},
       startDate = #{record.startdate,jdbcType=DATE},
+      phonenum = #{record.phonenum,jdbcType=VARCHAR},
+      numcount = #{record.numcount,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      receivable = #{record.receivable,jdbcType=DECIMAL},
+      received = #{record.received,jdbcType=DECIMAL},
+      b2b = #{record.b2b,jdbcType=DECIMAL},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      salesroom = #{record.salesroom,jdbcType=VARCHAR},
+      contract = #{record.contract,jdbcType=VARCHAR},
+      invoice = #{record.invoice,jdbcType=VARCHAR},
       finishDate = #{record.finishdate,jdbcType=DATE},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      more = #{record.more,jdbcType=VARCHAR},
+      grouptype = #{record.grouptype,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
-      more = #{record.more,jdbcType=VARCHAR}
+      gname = #{record.gname,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -269,57 +339,82 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.gl.mgr.bean.Lxy" >
     update lxy
     <set >
-      <if test="grouptype != null" >
-        grouptype = #{grouptype,jdbcType=VARCHAR},
-      </if>
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="numcount != null" >
-        numcount = #{numcount,jdbcType=INTEGER},
-      </if>
-      <if test="principal != null" >
-        principal = #{principal,jdbcType=VARCHAR},
+      <if test="startdate != null" >
+        startDate = #{startdate,jdbcType=DATE},
       </if>
       <if test="phonenum != null" >
         phonenum = #{phonenum,jdbcType=VARCHAR},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
+      <if test="numcount != null" >
+        numcount = #{numcount,jdbcType=INTEGER},
       </if>
-      <if test="profit != null" >
-        profit = #{profit,jdbcType=DECIMAL},
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="startdate != null" >
-        startDate = #{startdate,jdbcType=DATE},
+      <if test="receivable != null" >
+        receivable = #{receivable,jdbcType=DECIMAL},
+      </if>
+      <if test="received != null" >
+        received = #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="b2b != null" >
+        b2b = #{b2b,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="salesroom != null" >
+        salesroom = #{salesroom,jdbcType=VARCHAR},
+      </if>
+      <if test="contract != null" >
+        contract = #{contract,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        invoice = #{invoice,jdbcType=VARCHAR},
       </if>
       <if test="finishdate != null" >
         finishDate = #{finishdate,jdbcType=DATE},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=INTEGER},
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
       </if>
       <if test="more != null" >
         more = #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="grouptype != null" >
+        grouptype = #{grouptype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="gname != null" >
+        gname = #{gname,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gl.mgr.bean.Lxy" >
     update lxy
-    set grouptype = #{grouptype,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      numcount = #{numcount,jdbcType=INTEGER},
-      principal = #{principal,jdbcType=VARCHAR},
+    set startDate = #{startdate,jdbcType=DATE},
       phonenum = #{phonenum,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DECIMAL},
-      profit = #{profit,jdbcType=DECIMAL},
-      startDate = #{startdate,jdbcType=DATE},
+      numcount = #{numcount,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      receivable = #{receivable,jdbcType=DECIMAL},
+      received = #{received,jdbcType=DECIMAL},
+      b2b = #{b2b,jdbcType=DECIMAL},
+      operator = #{operator,jdbcType=VARCHAR},
+      salesroom = #{salesroom,jdbcType=VARCHAR},
+      contract = #{contract,jdbcType=VARCHAR},
+      invoice = #{invoice,jdbcType=VARCHAR},
       finishDate = #{finishdate,jdbcType=DATE},
+      principal = #{principal,jdbcType=VARCHAR},
+      more = #{more,jdbcType=VARCHAR},
+      grouptype = #{grouptype,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      more = #{more,jdbcType=VARCHAR}
+      gname = #{gname,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <delete id="deleteLxyMember" parameterType="java.lang.Integer">
       delete from lxy_member where lxyId = #{lxyId}
   </delete>
