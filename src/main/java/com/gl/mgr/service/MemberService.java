@@ -15,5 +15,7 @@ public interface MemberService {
     PageInfo<Member> queryAllMemberScattered(Member checkMember,int scatteredId, int currentPage, int pageLimit);
     int insertMemberScattered(Member member,int scatteredId);
     int deleteMemberByIdScattered(int memberId,int scatteredId);
-
+    PageInfo<Member> queryAllMemberQz(Member checkMember,int qid, int currentPage, int pageLimit);
+    int insertMemberQz(Member member,int qid);
+    int deleteMemberByIdQz(int memberId,int qid);
 }

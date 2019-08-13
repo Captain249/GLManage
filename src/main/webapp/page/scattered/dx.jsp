@@ -53,7 +53,7 @@
                 ,{field:'startdate', width:'15%', title: '出发日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
                 ,{field:'principal', width:'10%', title: '负责人'}
                 ,{field:'phonenum', width:'15%', title: '手机号'}
-                ,{field:'num', width:'7%', title: '人数'}
+                ,{field:'num', width:'7%', title: '人数',sort: true}
                 ,{field:'name',width:'20%', title: '行程'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
                /* ,{field:'receivable',width:'5%', title: '应收款'}
                 ,{field:'received',width:'5%', title: '实收款'}

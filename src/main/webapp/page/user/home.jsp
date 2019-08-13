@@ -108,6 +108,16 @@
                             <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembersScattered?scatteredId=0" id="member2">全部人员</a></dd>
                         </dl>
                     </li>
+                    <li data-name="component" class="layui-nav-item">
+                        <a href="javascript:;" lay-tips="签证管理" lay-direction="2">
+                            <i class="layui-icon layui-icon-component"></i>
+                            <cite>签证管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a lay-href="<%=path%>/qz/goallQz">签证</a></dd>
+                            <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembersQz?qzid=0" id="member3">全部人员</a></dd>
+                        </dl>
+                    </li>
                    <%-- <li data-name="template" class="layui-nav-item">
                         <a href="javascript:;" lay-tips="人员管理" lay-direction="2">
                             <i class="layui-icon layui-icon-template"></i>

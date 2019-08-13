@@ -106,6 +106,8 @@ public class LxyController {
         if(lxy.getFinishdate()!=null){
             String finishDate = simpleDateFormat.format(lxy.getFinishdate());
             html  = "<table width='250px'>" +
+                    "<tr><td align='right'>负责人:&nbsp;</td><td><span align='left'>"+lxy.getPrincipal()+"</span></td></tr>" +
+                    "<tr><td align='right'>手机号:&nbsp;</td><td><span align='left'>"+lxy.getPhonenum()+"</span></td></tr>" +
                     "<tr><td align='right'>应收款:&nbsp;</td><td><span align='left'>"+lxy.getReceivable()+"元</span></td></tr>" +
                     "<tr><td align='right'>实收款:&nbsp;</td><td><span align='left'>"+lxy.getReceived()+"元</span></td></tr>" +
                     "<tr><td align='right'>b2b报名:&nbsp;</td><td><span align='left'>"+lxy.getB2b()+"元</span></td></tr>" +
@@ -117,6 +119,8 @@ public class LxyController {
                     +"</table>";
         }else{
              html = "<table width='250px'>" +
+                     "<tr><td align='right'>负责人:&nbsp;</td><td><span align='left'>"+lxy.getPrincipal()+"</span></td></tr>" +
+                     "<tr><td align='right'>手机号:&nbsp;</td><td><span align='left'>"+lxy.getPhonenum()+"</span></td></tr>" +
                      "<tr><td align='right'>应收款:&nbsp;</td><td><span align='left'>"+lxy.getReceivable()+"元</span></td></tr>" +
                      "<tr><td align='right'>实收款:&nbsp;</td><td><span align='left'>"+lxy.getReceived()+"元</span></td></tr>" +
                      "<tr><td align='right'>b2b报名:&nbsp;</td><td><span align='left'>"+lxy.getB2b()+"元</span></td></tr>" +
@@ -157,9 +161,11 @@ public class LxyController {
         Date satrtDate = simpleDateFormat.parse(startdateStr);
         lxyParam.setStartdate(satrtDate);
         Lxy lxy = lxyService.queryLxyById(lxyParam.getId());
-        if(lxy.getStatus() == 0){
-            lxyParam.setStatus(1);
-            lxyParam.setFinishdate(new Date());
+        if(lxyParam.getStatus() == 1){
+            if(lxy.getStatus() == 0){
+                lxyParam.setStatus(1);
+                lxyParam.setFinishdate(new Date());
+            }
         }
         lxyService.updateLxyById(lxyParam);
         return true;

@@ -12,6 +12,13 @@
     <link href="<%=path%>/css/style.css" rel='stylesheet' type='text/css' />
     <script src="<%=path%>/layuiadmin/jquery.min.js"></script>
 </head>
+<style>
+    html,body{
+        margin: 0px 0px;
+        width:100%;
+        height:100%;
+    }
+</style>
 <body>
 
 <!--SIGN UP-->

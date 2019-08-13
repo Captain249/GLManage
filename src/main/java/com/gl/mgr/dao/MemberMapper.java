@@ -39,4 +39,10 @@ public interface MemberMapper {
     int deleteScatteredMember(@Param("scatteredId")int scatteredId,@Param("memberId")int memberId);
 
     int insertScatteredMember(@Param("scatteredId")int scatteredId,@Param("memberId")int memberId);
+
+    List<Integer> queryMembersByQzId (@Param("qid") int qid);
+
+    int deleteQzMember(@Param("qid")int qid,@Param("mid")int mid);
+
+    int insertQzMember(@Param("qid")int qid,@Param("mid")int mid);
 }

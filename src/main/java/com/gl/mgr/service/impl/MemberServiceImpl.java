@@ -175,4 +175,39 @@ public class MemberServiceImpl implements MemberService {
         memberMapper.deleteScatteredMember(scatteredId,memberId);
         return 1;
     }
+
+    @Override
+    public PageInfo<Member> queryAllMemberQz(Member checkMember, int qid, int currentPage, int pageLimit) {
+        List<Integer> memberIds = memberMapper.queryMembersByQzId(qid);
+        MemberExample example = new MemberExample();
+        MemberExample.Criteria criteria = example.createCriteria();
+        if(checkMember.getName()!=null&& !"".equals(checkMember.getName())){
+            criteria.andNameLike("%"+checkMember.getName()+"%");
+        }
+        if(!memberIds.isEmpty()){
+            criteria.andIdIn(memberIds);
+        }
+        Page<Member> pageObject = PageHelper.startPage(currentPage,pageLimit);
+        List<Member> memberList = memberMapper.selectByExample(example);
+        //将用户信息放入PageInfo对象里
+        PageInfo<Member> pageInfo = new PageInfo<Member>(memberList, pageLimit);
+        if(memberIds.isEmpty()){
+            pageInfo = new PageInfo<Member>(new ArrayList<Member>(),pageLimit);
+        }
+        return pageInfo;
+    }
+
+    @Override
+    public int insertMemberQz(Member member, int qid) {
+        memberMapper.insert(member);
+        memberMapper.insertQzMember(qid,member.getId());
+        return 1;
+    }
+
+    @Override
+    public int deleteMemberByIdQz(int memberId, int qid) {
+        memberMapper.deleteByPrimaryKey(memberId);
+        memberMapper.deleteQzMember(qid,memberId);
+        return 1;
+    }
 }

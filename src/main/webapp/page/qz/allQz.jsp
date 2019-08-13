@@ -43,7 +43,7 @@
         var table = layui.table;
         table.render({
             elem: '#scatteredTable'
-            ,url:'<%=path %>/scattered/gnhk'
+            ,url:'<%=path %>/qz/getAllQz'
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,id:'myTable'
             ,method:'post'
@@ -54,7 +54,7 @@
                 ,{field:'principal', width:'10%', title: '负责人'}
                 ,{field:'phonenum', width:'15%', title: '手机号'}
                 ,{field:'num', width:'7%', title: '人数',sort: true}
-                ,{field:'name',width:'20%', title: '行程'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'name',width:'20%', title: '签证国家'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
           /*      ,{field:'receivable',width:'5%', title: '应收款'}
                 ,{field:'received',width:'5%', title: '实收款'}
                 ,{field:'b2b',width:'5%', title: 'b2b报名'}
@@ -91,7 +91,7 @@
             if(layEvent === 'detail'){ //查看详情
                 $.ajax({
                     type:"post",
-                    url:"<%=path %>/scattered/queryScatteredById",
+                    url:"<%=path %>/qz/queryQzById",
                     dataType:'json',
                     data: "id="+data.id ,
                     success: function (data) {
@@ -112,7 +112,7 @@
                     layer.close(index);
                     $.ajax({
                         type:"post",
-                        url:"<%=path %>/scattered/deleteScatteredById",
+                        url:"<%=path %>/qz/deleteQzById",
                         dataType:'json',
                         data: "id="+data.id ,
                     })
@@ -124,7 +124,7 @@
                     type: 2,
                     offset: 't',
                     area: ['500px', '500px'],
-                    content: "<%=path%>/scattered/editScatteredById?id="+data.id,
+                    content: "<%=path%>/qz/editQzById?id="+data.id,
                     offset:"t"
                 });
                 /*//同步更新缓存对应的值
@@ -133,8 +133,8 @@
                     ,title: 'xxx'
                 });*/
             } else if(layEvent == 'detailmember'){
-                $("#member2", parent.document).attr("lay-href","<%=path%>/member/allmembersScattered?scatteredId="+data.id);
-                $("#member2", parent.document)[0].click();
+                $("#member3", parent.document).attr("lay-href","<%=path%>/member/allmembersQz?qzid="+data.id);
+                $("#member3", parent.document)[0].click();
                 //$("#member", parent.document).attr("lay-href","<%=path%>/member/allmembersScattered?scatteredId=0");
             }/*else if(layEvent == 'add'){
                     alert(11);
@@ -152,7 +152,7 @@
                     type: 2,
                     offset: 't',
                     area: ['500px', '500px'],
-                    content: "<%=path%>/scattered/addScattered?type=gnhk",
+                    content: "<%=path%>/qz/addQz",
                     offset:"t"
                 });
             } else if(layEvent === 'import'){ //删除

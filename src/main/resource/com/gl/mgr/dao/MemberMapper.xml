@@ -259,4 +259,14 @@
   <insert id="insertScatteredMember">
       insert into scattered_member (scatteredId,memberId) values (#{scatteredId},#{memberId})
   </insert>
+
+  <select id="queryMembersByQzId" resultType="java.lang.Integer">
+      select mid from qz_member where qid = #{qid}
+  </select>
+  <delete id="deleteQzMember">
+      delete from qz_member where qid = #{qid} and mid = #{mid}
+  </delete>
+  <insert id="insertQzMember">
+      insert into qz_member (qid,mid) values (#{qid},#{mid})
+  </insert>
 </mapper>

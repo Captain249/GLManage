@@ -158,9 +158,11 @@ public class ScatteredController {
         Date satrtDate = simpleDateFormat.parse(startdateStr);
         scatteredParam.setStartdate(satrtDate);
         Scattered scattered = scatteredService.queryScatteredById(scatteredParam.getId());
-        if(scattered.getStatus() == 0){
-            scatteredParam.setStatus(1);
-            scatteredParam.setEnddate(new Date());
+        if(scatteredParam.getStatus() == 1){
+            if(scattered.getStatus() == 0){
+                scatteredParam.setStatus(1);
+                scatteredParam.setEnddate(new Date());
+            }
         }
         scatteredService.updateScatteredById(scatteredParam);
         return true;

@@ -50,13 +50,13 @@
             ,cols: [[
                 {title: '序号', width:'5%',type:'numbers'}
                 //,{field:'id', width:'5%', title: 'ID', sort: true}
-                ,{field:'startdate', width:'10%', title: '出发日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
-                ,{field:'gname', width:'10%', title: '单位名'}
-                ,{field:'principal', width:'10%', title: '负责人'}
-                ,{field:'phonenum', width:'10%', title: '手机号'}
-                ,{field:'numcount', width:'5%', title: '人数'}
+                ,{field:'startdate', width:'15%', title: '出发日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
+                ,{field:'gname', width:'17%', title: '单位名'}
+              /*  ,{field:'principal', width:'10%', title: '负责人'}
+                ,{field:'phonenum', width:'10%', title: '手机号'}*/
+                ,{field:'numcount', width:'5%', title: '人数',sort: true}
                 ,{field:'name',width:'20%', title: '行程'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                /*      ,{field:'receivable',width:'5%', title: '应收款'}
+                /*    ,{field:'receivable',width:'5%', title: '应收款'}
                       ,{field:'received',width:'5%', title: '实收款'}
                       ,{field:'b2b',width:'5%', title: 'b2b报名'}
                       ,{field:'salesroom',width:'5%', title: '门市'}
@@ -98,7 +98,7 @@
                     success: function (data) {
                         layer.open({
                             title:'查看详情',
-                            area:['300px','300px'],
+                            area:['300px','350px'],
                             shade: 0.4,
                             content: data.html,
                         })
