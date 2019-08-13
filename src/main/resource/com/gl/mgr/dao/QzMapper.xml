@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gl.mgr.dao.QzMapper" >
+  <resultMap id="BaseResultMap" type="com.gl.mgr.bean.Qz" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="startDate" property="startdate" jdbcType="DATE" />
+    <result column="endDate" property="enddate" jdbcType="DATE" />
+    <result column="principal" property="principal" jdbcType="VARCHAR" />
+    <result column="phonenum" property="phonenum" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="receivable" property="receivable" jdbcType="DECIMAL" />
+    <result column="received" property="received" jdbcType="DECIMAL" />
+    <result column="b2b" property="b2b" jdbcType="DECIMAL" />
+    <result column="operator" property="operator" jdbcType="VARCHAR" />
+    <result column="salesroom" property="salesroom" jdbcType="VARCHAR" />
+    <result column="contract" property="contract" jdbcType="VARCHAR" />
+    <result column="invoice" property="invoice" jdbcType="VARCHAR" />
+    <result column="more" property="more" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, startDate, endDate, principal, phonenum, num, name, receivable, received, b2b, 
+    operator, salesroom, contract, invoice, more, type, status
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gl.mgr.bean.QzExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from qz
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from qz
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from qz
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.gl.mgr.bean.QzExample" >
+    delete from qz
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.gl.mgr.bean.Qz" >
+    insert into qz (id, startDate, endDate, 
+      principal, phonenum, num, 
+      name, receivable, received, 
+      b2b, operator, salesroom, 
+      contract, invoice, more, 
+      type, status)
+    values (#{id,jdbcType=INTEGER}, #{startdate,jdbcType=DATE}, #{enddate,jdbcType=DATE}, 
+      #{principal,jdbcType=VARCHAR}, #{phonenum,jdbcType=VARCHAR}, #{num,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{receivable,jdbcType=DECIMAL}, #{received,jdbcType=DECIMAL}, 
+      #{b2b,jdbcType=DECIMAL}, #{operator,jdbcType=VARCHAR}, #{salesroom,jdbcType=VARCHAR}, 
+      #{contract,jdbcType=VARCHAR}, #{invoice,jdbcType=VARCHAR}, #{more,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gl.mgr.bean.Qz" >
+    insert into qz
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="startdate != null" >
+        startDate,
+      </if>
+      <if test="enddate != null" >
+        endDate,
+      </if>
+      <if test="principal != null" >
+        principal,
+      </if>
+      <if test="phonenum != null" >
+        phonenum,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="receivable != null" >
+        receivable,
+      </if>
+      <if test="received != null" >
+        received,
+      </if>
+      <if test="b2b != null" >
+        b2b,
+      </if>
+      <if test="operator != null" >
+        operator,
+      </if>
+      <if test="salesroom != null" >
+        salesroom,
+      </if>
+      <if test="contract != null" >
+        contract,
+      </if>
+      <if test="invoice != null" >
+        invoice,
+      </if>
+      <if test="more != null" >
+        more,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="startdate != null" >
+        #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        #{enddate,jdbcType=DATE},
+      </if>
+      <if test="principal != null" >
+        #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="receivable != null" >
+        #{receivable,jdbcType=DECIMAL},
+      </if>
+      <if test="received != null" >
+        #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="b2b != null" >
+        #{b2b,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null" >
+        #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="salesroom != null" >
+        #{salesroom,jdbcType=VARCHAR},
+      </if>
+      <if test="contract != null" >
+        #{contract,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="more != null" >
+        #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gl.mgr.bean.QzExample" resultType="java.lang.Integer" >
+    select count(*) from qz
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update qz
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.startdate != null" >
+        startDate = #{record.startdate,jdbcType=DATE},
+      </if>
+      <if test="record.enddate != null" >
+        endDate = #{record.enddate,jdbcType=DATE},
+      </if>
+      <if test="record.principal != null" >
+        principal = #{record.principal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenum != null" >
+        phonenum = #{record.phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.num != null" >
+        num = #{record.num,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receivable != null" >
+        receivable = #{record.receivable,jdbcType=DECIMAL},
+      </if>
+      <if test="record.received != null" >
+        received = #{record.received,jdbcType=DECIMAL},
+      </if>
+      <if test="record.b2b != null" >
+        b2b = #{record.b2b,jdbcType=DECIMAL},
+      </if>
+      <if test="record.operator != null" >
+        operator = #{record.operator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salesroom != null" >
+        salesroom = #{record.salesroom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contract != null" >
+        contract = #{record.contract,jdbcType=VARCHAR},
+      </if>
+      <if test="record.invoice != null" >
+        invoice = #{record.invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.more != null" >
+        more = #{record.more,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update qz
+    set id = #{record.id,jdbcType=INTEGER},
+      startDate = #{record.startdate,jdbcType=DATE},
+      endDate = #{record.enddate,jdbcType=DATE},
+      principal = #{record.principal,jdbcType=VARCHAR},
+      phonenum = #{record.phonenum,jdbcType=VARCHAR},
+      num = #{record.num,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      receivable = #{record.receivable,jdbcType=DECIMAL},
+      received = #{record.received,jdbcType=DECIMAL},
+      b2b = #{record.b2b,jdbcType=DECIMAL},
+      operator = #{record.operator,jdbcType=VARCHAR},
+      salesroom = #{record.salesroom,jdbcType=VARCHAR},
+      contract = #{record.contract,jdbcType=VARCHAR},
+      invoice = #{record.invoice,jdbcType=VARCHAR},
+      more = #{record.more,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gl.mgr.bean.Qz" >
+    update qz
+    <set >
+      <if test="startdate != null" >
+        startDate = #{startdate,jdbcType=DATE},
+      </if>
+      <if test="enddate != null" >
+        endDate = #{enddate,jdbcType=DATE},
+      </if>
+      <if test="principal != null" >
+        principal = #{principal,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenum != null" >
+        phonenum = #{phonenum,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="receivable != null" >
+        receivable = #{receivable,jdbcType=DECIMAL},
+      </if>
+      <if test="received != null" >
+        received = #{received,jdbcType=DECIMAL},
+      </if>
+      <if test="b2b != null" >
+        b2b = #{b2b,jdbcType=DECIMAL},
+      </if>
+      <if test="operator != null" >
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+      <if test="salesroom != null" >
+        salesroom = #{salesroom,jdbcType=VARCHAR},
+      </if>
+      <if test="contract != null" >
+        contract = #{contract,jdbcType=VARCHAR},
+      </if>
+      <if test="invoice != null" >
+        invoice = #{invoice,jdbcType=VARCHAR},
+      </if>
+      <if test="more != null" >
+        more = #{more,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gl.mgr.bean.Qz" >
+    update qz
+    set startDate = #{startdate,jdbcType=DATE},
+      endDate = #{enddate,jdbcType=DATE},
+      principal = #{principal,jdbcType=VARCHAR},
+      phonenum = #{phonenum,jdbcType=VARCHAR},
+      num = #{num,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      receivable = #{receivable,jdbcType=DECIMAL},
+      received = #{received,jdbcType=DECIMAL},
+      b2b = #{b2b,jdbcType=DECIMAL},
+      operator = #{operator,jdbcType=VARCHAR},
+      salesroom = #{salesroom,jdbcType=VARCHAR},
+      contract = #{contract,jdbcType=VARCHAR},
+      invoice = #{invoice,jdbcType=VARCHAR},
+      more = #{more,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <delete id="deleteQzMember" parameterType="java.lang.Integer">
+      delete from qz_member where qid = #{qid}
+  </delete>
+</mapper>
