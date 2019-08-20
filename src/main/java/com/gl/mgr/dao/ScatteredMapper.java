@@ -3,6 +3,8 @@ package com.gl.mgr.dao;
 import com.gl.mgr.bean.Scattered;
 import com.gl.mgr.bean.ScatteredExample;
 import java.util.List;
+
+import com.gl.mgr.bean.Statistic;
 import org.apache.ibatis.annotations.Param;
 
 public interface ScatteredMapper {
@@ -29,4 +31,6 @@ public interface ScatteredMapper {
     int updateByPrimaryKey(Scattered record);
 
     int deleteScatteredMember(int scattered);
+
+    List<Statistic> statistic(String year);
 }

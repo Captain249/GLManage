@@ -19,81 +19,81 @@
     <div class="layui-form-item">
         <label class="layui-form-label">签证国家</label>
         <div class="layui-input-block">
-            <input type="text" name="name" style="width:300px;" value="${editQz.name}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="name" style="width:300px;" value="${editQz.name}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">开始日期</label>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" style="width:300px;" value="${startDateQz}" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
+                <input type="text" class="layui-input" style="width:300px;" value="${startDateQz}" required lay-verify="required" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
             </div>
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">人数</label>
         <div class="layui-input-block">
-            <input type="text" name="num" style="width:300px;" value="${editQz.num}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="num" style="width:300px;" value="${editQz.num}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">负责人</label>
         <div class="layui-input-block">
-            <input type="text" name="principal" style="width:300px;" value="${editQz.principal}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="principal" style="width:300px;" value="${editQz.principal}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">手机号</label>
         <div class="layui-input-block">
-            <input type="text" name="phonenum" style="width:300px;" required value="${editQz.phonenum}"  lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="phonenum" style="width:300px;" value="${editQz.phonenum}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">应收款(元)</label>
         <div class="layui-input-block">
-            <input type="text" name="receivable" style="width:300px;" required value="${editQz.receivable}" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="receivable" style="width:300px;" value="${editQz.receivable}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">实收款(元)</label>
         <div class="layui-input-block">
-            <input type="text" name="received" style="width:300px;" required value="${editQz.received}" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="received" style="width:300px;" value="${editQz.received}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">b2b报名(元)</label>
         <div class="layui-input-block">
-            <input type="text" name="b2b" style="width:300px;" required value="${editQz.b2b}" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="b2b" style="width:300px;" value="${editQz.b2b}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">操作/业务</label>
         <div class="layui-input-block">
-            <input type="text" name="operator" style="width:300px;" required value="${editQz.operator}" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="operator" style="width:300px;" value="${editQz.operator}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">门市</label>
         <div class="layui-input-block">
-            <input type="text" name="salesroom" style="width:300px;" required value="${editQz.salesroom}" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="salesroom" style="width:300px;" value="${editQz.salesroom}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">合同</label>
         <div class="layui-input-block">
-            <input type="text" name="contract" style="width:300px;" required value="${editQz.contract}" lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="contract" style="width:300px;" value="${editQz.contract}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">发票抬头</label>
         <div class="layui-input-block">
-            <input type="text" name="invoice" style="width:300px;" value="${editQz.invoice}" required  lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="invoice" style="width:300px;" value="${editQz.invoice}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <input type="text" name="more" style="width:300px;" required value="${editQz.more}"  lay-verify="required" autocomplete="off" class="layui-input">
+            <input type="text" name="more" style="width:300px;" value="${editQz.more}" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">

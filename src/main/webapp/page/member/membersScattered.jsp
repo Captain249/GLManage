@@ -94,6 +94,7 @@
                                 area:['420px','180px'],
                                 shade: 0.4,
                                 content: data.html,
+                                offset:"t"
                             })
                         },
                         error:function(){

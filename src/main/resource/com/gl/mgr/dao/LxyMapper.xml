@@ -418,4 +418,8 @@
   <delete id="deleteLxyMember" parameterType="java.lang.Integer">
       delete from lxy_member where lxyId = #{lxyId}
   </delete>
+
+  <select id="statistic" parameterType="java.lang.String" resultType="com.gl.mgr.bean.Statistic">
+      select sum(receivable) as ys,sum(received) as ss,sum(b2b) as b2bs,date_format(startDate, '%Y-%m') as time, count(*) as num from lxy group by time having time BETWEEN CONCAT(#{year},'-01') and CONCAT(#{year},'-12')
+  </select>
 </mapper>

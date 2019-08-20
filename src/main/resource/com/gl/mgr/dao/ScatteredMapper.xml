@@ -401,4 +401,8 @@
   <delete id="deleteScatteredMember" parameterType="java.lang.Integer">
       delete from scattered_member where scatteredId = #{scatteredId}
   </delete>
+
+  <select id="statistic" parameterType="java.lang.String" resultType="com.gl.mgr.bean.Statistic">
+      select sum(receivable) as ys,sum(received) as ss,sum(b2b) as b2bs,date_format(startDate, '%Y-%m') as time, count(*) as num from scattered group by time having time BETWEEN CONCAT(#{year},'-01') and CONCAT(#{year},'-12')
+  </select>
 </mapper>

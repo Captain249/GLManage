@@ -29,9 +29,8 @@ public class QzServiceImpl implements QzService {
     @Override
     public PageInfo<Qz> getAllQz(Qz checkQz, int currentPage, int pageLimit) {
         QzExample example = new QzExample();
-        QzExample.Criteria criteria = example.createCriteria();
         if(checkQz.getName()!=null&&!"".equals(checkQz.getName())){
-            criteria.andNameLike("%"+checkQz.getName()+"%");
+            example.or().andNameLike("%"+checkQz.getName()+"%");
             example.or().andPrincipalLike("%"+checkQz.getName()+"%");
         }
         example.setOrderByClause("startDate DESC");

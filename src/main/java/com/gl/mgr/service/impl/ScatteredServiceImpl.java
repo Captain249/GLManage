@@ -26,11 +26,11 @@ public class ScatteredServiceImpl implements ScatteredService {
     @Override
     public PageInfo<Scattered> gnhk(Scattered checkScattered, int currentPage, int pageLimit) {
         ScatteredExample example = new ScatteredExample();
-        ScatteredExample.Criteria criteria = example.createCriteria();
-        criteria.andTypeEqualTo("国内航空线");
         if(checkScattered.getName()!=null&&!"".equals(checkScattered.getName())){
-            criteria.andNameLike("%"+checkScattered.getName()+"%");
-            example.or().andPrincipalLike("%"+checkScattered.getName()+"%");
+            example.or().andNameLike("%"+checkScattered.getName()+"%").andTypeEqualTo("国内航空线");
+            example.or().andPrincipalLike("%"+checkScattered.getName()+"%").andTypeEqualTo("国内航空线");
+        }else{
+            example.or().andTypeEqualTo("国内航空线");
         }
         example.setOrderByClause("startDate DESC");
         Page<Scattered> pageObject = PageHelper.startPage(currentPage,pageLimit);
@@ -42,11 +42,11 @@ public class ScatteredServiceImpl implements ScatteredService {
     @Override
     public PageInfo<Scattered> cj(Scattered checkScattered, int currentPage, int pageLimit) {
         ScatteredExample example = new ScatteredExample();
-        ScatteredExample.Criteria criteria = example.createCriteria();
-        criteria.andTypeEqualTo("出境");
         if(checkScattered.getName()!=null&&!"".equals(checkScattered.getName())){
-            criteria.andNameLike("%"+checkScattered.getName()+"%");
-            example.or().andPrincipalLike("%"+checkScattered.getName()+"%");
+            example.or().andNameLike("%"+checkScattered.getName()+"%").andTypeEqualTo("出境");
+            example.or().andPrincipalLike("%"+checkScattered.getName()+"%").andTypeEqualTo("出境");
+        }else{
+            example.or().andTypeEqualTo("出境");
         }
         example.setOrderByClause("startDate DESC");
         Page<Scattered> pageObject = PageHelper.startPage(currentPage,pageLimit);
@@ -58,11 +58,11 @@ public class ScatteredServiceImpl implements ScatteredService {
     @Override
     public PageInfo<Scattered> dx(Scattered checkScattered, int currentPage, int pageLimit) {
         ScatteredExample example = new ScatteredExample();
-        ScatteredExample.Criteria criteria = example.createCriteria();
-        criteria.andTypeEqualTo("短线");
         if(checkScattered.getName()!=null&&!"".equals(checkScattered.getName())){
-            criteria.andNameLike("%"+checkScattered.getName()+"%");
-            example.or().andPrincipalLike("%"+checkScattered.getName()+"%");
+            example.or().andNameLike("%"+checkScattered.getName()+"%").andTypeEqualTo("短线");
+            example.or().andPrincipalLike("%"+checkScattered.getName()+"%").andTypeEqualTo("短线");
+        }else{
+            example.or().andTypeEqualTo("短线");
         }
         example.setOrderByClause("startDate DESC");
         Page<Scattered> pageObject = PageHelper.startPage(currentPage,pageLimit);

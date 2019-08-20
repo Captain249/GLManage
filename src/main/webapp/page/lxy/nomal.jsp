@@ -43,7 +43,7 @@
         var table = layui.table;
         table.render({
             elem: '#lxyTable'
-            ,url:'<%=path %>/lxy/getfinishlxy'
+            ,url:'<%=path %>/lxy/getNomal'
             ,cellMinWidth: 50 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,id:'myTable'
             ,method:'post'
@@ -52,17 +52,18 @@
                 //,{field:'id', width:'5%', title: 'ID', sort: true}
                 ,{field:'startdate', width:'15%', title: '出发日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
                 ,{field:'gname', width:'17%', title: '单位名'}
-              /*  ,{field:'principal', width:'10%', title: '负责人'}
-                ,{field:'phonenum', width:'10%', title: '手机号'}*/
-                ,{field:'numcount', width:'5%', title: '人数',sort: true}
+                ,{field:'grouptype', width:'8%', title: '类型',sort:true}
+                /* ,{field:'principal', width:'10%', title: '负责人'}
+                 ,{field:'phonenum', width:'10%', title: '手机号'}*/
+                ,{field:'numcount', width:'5%', title: '人数',sort:true}
                 ,{field:'name',width:'20%', title: '行程'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                /*    ,{field:'receivable',width:'5%', title: '应收款'}
+                /*      ,{field:'receivable',width:'5%', title: '应收款'}
                       ,{field:'received',width:'5%', title: '实收款'}
                       ,{field:'b2b',width:'5%', title: 'b2b报名'}
                       ,{field:'salesroom',width:'5%', title: '门市'}
                       ,{field:'contract',width:'7%', title: '合同'}
                       ,{field:'invoice',width:'7%', title: '发票抬头'}*/
-                ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
+                ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl',sort:true}
                 ,{fixed: 'right', width:'18%', title:'操作', align:'center', toolbar: '#barDemo'}
             ]]
             ,page:true
@@ -98,9 +99,10 @@
                     success: function (data) {
                         layer.open({
                             title:'查看详情',
-                            area:['300px','350px'],
+                            area:['300px','370px'],
                             shade: 0.4,
                             content: data.html,
+                            offset:"t"
                         })
                     },
                     error:function(){

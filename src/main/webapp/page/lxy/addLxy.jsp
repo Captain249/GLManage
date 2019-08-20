@@ -18,100 +18,101 @@
         <div class="layui-form-item">
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block" style="width: 300px;">
-                <select name="grouptype" lay-verify="required">
+                <select name="grouptype" required lay-verify="required">
                     <option value="">请选择</option>
+                    <option value="普通团队">普通团队</option>
                     <option value="医院">医院</option>
                     <option value="学校">学校</option>
                     <option value="企业">企业</option>
                     <option value="街道">街道</option>
-                    <option value="行政事业单位">事业单位</option>
+                    <option value="行政事业单位">行政事业单位</option>
                 </select>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">行程</label>
             <div class="layui-input-block">
-                <input type="text" name="name" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="name" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">单位名</label>
             <div class="layui-input-block">
-                <input type="text" name="gname" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="gname" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">开始日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" style="width:300px;" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
+                    <input type="text" class="layui-input" required lay-verify="required" style="width:300px;" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">人数</label>
             <div class="layui-input-block">
-                <input type="text" name="numcount" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="numcount" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">负责人</label>
             <div class="layui-input-block">
-                <input type="text" name="principal" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="principal" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-block">
-                <input type="text" name="phonenum" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="phonenum" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">应收款(元)</label>
             <div class="layui-input-block">
-                <input type="text" name="receivable" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="receivable" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">实收款(元)</label>
             <div class="layui-input-block">
-                <input type="text" name="received" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="received" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">b2b报名(元)</label>
             <div class="layui-input-block">
-                <input type="text" name="b2b" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="b2b" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">操作/业务</label>
             <div class="layui-input-block">
-                <input type="text" name="operator" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="operator" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">门市</label>
             <div class="layui-input-block">
-                <input type="text" name="salesroom" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="salesroom" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">合同</label>
             <div class="layui-input-block">
-                <input type="text" name="contract" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="contract" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">发票抬头</label>
             <div class="layui-input-block">
-                <input type="text" name="invoice" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="invoice" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <input type="text" name="more" style="width:300px;" required  lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="more" style="width:300px;" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">

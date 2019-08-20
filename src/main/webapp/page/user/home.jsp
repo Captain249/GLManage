@@ -85,13 +85,13 @@
                         </dl>
                     </li>
                     <li data-name="component" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="疗休养管理" lay-direction="2">
+                        <a href="javascript:;" lay-tips="团队管理" lay-direction="2">
                             <i class="layui-icon layui-icon-component"></i>
-                            <cite>疗休养管理</cite>
+                            <cite>团队管理</cite>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a lay-href="<%=path%>/lxy/alllxy">全部展示</a></dd>
-                            <dd><a lay-href="<%=path%>/lxy/finishlxy">已完结</a></dd>
+                            <dd><a lay-href="<%=path%>/lxy/alllxy">疗休养</a></dd>
+                            <dd><a lay-href="<%=path%>/lxy/nomal">普通团队</a></dd>
                             <dd><a lay-href="<%=path%>/lxy/processlxy">未完结</a></dd>
                             <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembers?lxyId=0" id="member">全部人员</a></dd>
                         </dl>
@@ -109,13 +109,14 @@
                         </dl>
                     </li>
                     <li data-name="component" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="签证管理" lay-direction="2">
+                        <a href="javascript:;" lay-tips="其他管理" lay-direction="2">
                             <i class="layui-icon layui-icon-component"></i>
-                            <cite>签证管理</cite>
+                            <cite>其他管理</cite>
                         </a>
                         <dl class="layui-nav-child">
                             <dd><a lay-href="<%=path%>/qz/goallQz">签证</a></dd>
-                            <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembersQz?qzid=0" id="member3">全部人员</a></dd>
+                            <dd><a lay-href="<%=path%>/gwj/allGwj">港务局</a></dd>
+                            <dd><a lay-href="<%=path%>/zc/allZc">租车</a></dd>
                         </dl>
                     </li>
                    <%-- <li data-name="template" class="layui-nav-item">

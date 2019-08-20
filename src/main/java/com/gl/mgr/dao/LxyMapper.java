@@ -3,6 +3,8 @@ package com.gl.mgr.dao;
 import com.gl.mgr.bean.Lxy;
 import com.gl.mgr.bean.LxyExample;
 import java.util.List;
+
+import com.gl.mgr.bean.Statistic;
 import org.apache.ibatis.annotations.Param;
 
 public interface LxyMapper {
@@ -29,4 +31,6 @@ public interface LxyMapper {
     int updateByPrimaryKey(Lxy record);
 
     int deleteLxyMember(int lxyId);
+
+    List<Statistic> statistic(String year);
 }

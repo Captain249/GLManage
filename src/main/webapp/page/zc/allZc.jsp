@@ -33,7 +33,6 @@
 
 <%--表格右边功能块--%>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-xs" lay-event="detailmember">人员</a>
     <a class="layui-btn layui-btn-xs" lay-event="detail">详情</a>
     <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
@@ -43,26 +42,21 @@
         var table = layui.table;
         table.render({
             elem: '#scatteredTable'
-            ,url:'<%=path %>/qz/getAllQz'
+            ,url:'<%=path %>/zc/getallZc'
             ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
             ,id:'myTable'
             ,method:'post'
             ,cols: [[
                 {title: '序号', width:'5%',type:'numbers'}
-                //,{field:'id', width:'5%', title: 'ID', sort: true}
-                ,{field:'startdate', width:'15%', title: '出发日期',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
-                ,{field:'principal', width:'10%', title: '负责人'}
-                ,{field:'phonenum', width:'15%', title: '手机号'}
-                ,{field:'num', width:'7%', title: '人数',sort: true}
-                ,{field:'name',width:'20%', title: '签证国家'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-          /*      ,{field:'receivable',width:'5%', title: '应收款'}
-                ,{field:'received',width:'5%', title: '实收款'}
-                ,{field:'b2b',width:'5%', title: 'b2b报名'}
-                ,{field:'salesroom',width:'5%', title: '门市'}
-                ,{field:'contract',width:'7%', title: '合同'}
-                ,{field:'invoice',width:'7%', title: '发票抬头'}*/
-                ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl',sort: true}
-                ,{fixed: 'right', width:'21%', title:'操作', align:'center', toolbar: '#barDemo'}
+                ,{field:'company',width:'13%', title: '租车单位'/*, width: '30%', minWidth: 100*/} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                ,{field:'principal', width:'7%', title: '联系人'}
+                ,{field:'phonenum', width:'10%', title: '手机号'}
+                ,{field:'caroffer', width:'13%', title: '租车提供方'}
+                ,{field:'price', width:'7%', title: '租车费',sort:true}
+                ,{field:'cost', width:'7%', title: '成本',sort:true}
+                ,{field:'startdate', width:'10%', title: '租车时间',templet : "<div>{{layui.util.toDateString(d.startdate, 'yyyy年MM月dd日')}}</div>"}
+                ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl',sort:true}
+                ,{fixed: 'right', width:'16%', title:'操作', align:'center', toolbar: '#barDemo'}
             ]]
             ,page:true
             ,toolbar:'#barDemo2'
@@ -91,13 +85,13 @@
             if(layEvent === 'detail'){ //查看详情
                 $.ajax({
                     type:"post",
-                    url:"<%=path %>/qz/queryQzById",
+                    url:"<%=path %>/zc/queryZcById",
                     dataType:'json',
                     data: "id="+data.id ,
                     success: function (data) {
                         layer.open({
                             title:'查看详情',
-                            area:['300px','330px'],
+                            area:['300px','300px'],
                             shade: 0.4,
                             content: data.html,
                             offset:"t"
@@ -113,7 +107,7 @@
                     layer.close(index);
                     $.ajax({
                         type:"post",
-                        url:"<%=path %>/qz/deleteQzById",
+                        url:"<%=path %>/zc/deleteZcById",
                         dataType:'json',
                         data: "id="+data.id ,
                     })
@@ -125,23 +119,10 @@
                     type: 2,
                     offset: 't',
                     area: ['500px', '500px'],
-                    content: "<%=path%>/qz/editQzById?id="+data.id,
+                    content: "<%=path%>/zc/editZcById?id="+data.id,
                     offset:"t"
                 });
-                /*//同步更新缓存对应的值
-                obj.update({
-                    grouptype: '123'
-                    ,title: 'xxx'
-                });*/
-            } else if(layEvent == 'detailmember'){
-                $("#member3", parent.document).attr("lay-href","<%=path%>/member/allmembersQz?qzid="+data.id);
-                $("#member3", parent.document)[0].click();
-                //$("#member", parent.document).attr("lay-href","<%=path%>/member/allmembersScattered?scatteredId=0");
-            }/*else if(layEvent == 'add'){
-                    alert(11);
-                }else if(layEvent == 'import'){
-                    alert(112);
-                }*/
+            }
         });
 
         //左上角功能块
@@ -152,8 +133,8 @@
                     title: "新增",
                     type: 2,
                     offset: 't',
-                    area: ['500px', '500px'],
-                    content: "<%=path%>/qz/addQz",
+                    area: ['500px', '530px'],
+                    content: "<%=path%>/zc/addZc",
                     offset:"t"
                 });
             } else if(layEvent === 'import'){ //删除

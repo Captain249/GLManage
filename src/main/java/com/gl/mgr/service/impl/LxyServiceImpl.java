@@ -29,11 +29,12 @@ public class LxyServiceImpl implements LxyService {
     @Override
     public PageInfo<Lxy> queryAllLxy(Lxy checkLxy, int currentPage, int pageLimit) {
         LxyExample example = new LxyExample();
-        LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
-            criteria.andNameLike("%"+checkLxy.getName()+"%");
-            example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
-            example.or().andGnameLike("%"+checkLxy.getName()+"%");
+            example.or().andNameLike("%"+checkLxy.getName()+"%").andGrouptypeNotEqualTo("普通团队");
+            example.or().andPrincipalLike("%"+checkLxy.getName()+"%").andGrouptypeNotEqualTo("普通团队");
+            example.or().andGnameLike("%"+checkLxy.getName()+"%").andGrouptypeNotEqualTo("普通团队");
+        }else {
+            example.or().andGrouptypeNotEqualTo("普通团队");
         }
         example.setOrderByClause("startDate DESC");
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
@@ -43,16 +44,16 @@ public class LxyServiceImpl implements LxyService {
     }
 
     @Override
-    public PageInfo<Lxy> queryFinishLxy(Lxy checkLxy, int currentPage, int pageLimit) {
+    public PageInfo<Lxy> queryProcessLxy(Lxy checkLxy, int currentPage, int pageLimit) {
         LxyExample example = new LxyExample();
-        LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
-            criteria.andNameLike("%"+checkLxy.getName()+"%");
-            example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
-            example.or().andGnameLike("%"+checkLxy.getName()+"%");
+            example.or().andNameLike("%"+checkLxy.getName()+"%").andStatusEqualTo(0);
+            example.or().andPrincipalLike("%"+checkLxy.getName()+"%").andStatusEqualTo(0);
+            example.or().andGnameLike("%"+checkLxy.getName()+"%").andStatusEqualTo(0);
+        }else{
+            example.or().andStatusEqualTo(0);
         }
         example.setOrderByClause("startDate DESC");
-        criteria.andStatusEqualTo(1);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
         PageInfo<Lxy> pageInfo = new PageInfo<Lxy>(lxyList);
@@ -60,16 +61,16 @@ public class LxyServiceImpl implements LxyService {
     }
 
     @Override
-    public PageInfo<Lxy> queryProcessLxy(Lxy checkLxy, int currentPage, int pageLimit) {
+    public PageInfo<Lxy> queryNomal(Lxy checkLxy, int currentPage, int pageLimit) {
         LxyExample example = new LxyExample();
-        LxyExample.Criteria criteria = example.createCriteria();
         if(checkLxy.getName()!=null&&!"".equals(checkLxy.getName())){
-            criteria.andNameLike("%"+checkLxy.getName()+"%");
-            example.or().andPrincipalLike("%"+checkLxy.getName()+"%");
-            example.or().andGnameLike("%"+checkLxy.getName()+"%");
+            example.or().andNameLike("%"+checkLxy.getName()+"%").andGrouptypeEqualTo("普通团队");
+            example.or().andPrincipalLike("%"+checkLxy.getName()+"%").andGrouptypeEqualTo("普通团队");
+            example.or().andGnameLike("%"+checkLxy.getName()+"%").andGrouptypeEqualTo("普通团队");
+        }else{
+            example.or().andGrouptypeEqualTo("普通团队");
         }
         example.setOrderByClause("startDate DESC");
-        criteria.andStatusEqualTo(0);
         Page<Lxy> pageObject = PageHelper.startPage(currentPage,pageLimit);
         List<Lxy> lxyList = lxyMapper.selectByExample(example);
         PageInfo<Lxy> pageInfo = new PageInfo<Lxy>(lxyList);

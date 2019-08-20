@@ -15,31 +15,10 @@
 </head>
 <body>
 <form id="editForm" class="layui-form" autocomplete="off">
-
     <div class="layui-form-item">
-        <label class="layui-form-label">签证国家</label>
+        <label class="layui-form-label">姓名</label>
         <div class="layui-input-block">
             <input type="text" name="name" style="width:300px;" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">开始日期</label>
-            <div class="layui-input-inline">
-                <input type="text" class="layui-input" style="width:300px;" required  lay-verify="required" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
-            </div>
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">人数</label>
-        <div class="layui-input-block">
-            <input type="text" name="num" style="width:300px;"  autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">负责人</label>
-        <div class="layui-input-block">
-            <input type="text" name="principal" style="width:300px;"  autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -49,51 +28,35 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">应收款(元)</label>
+        <label class="layui-form-label">公司</label>
         <div class="layui-input-block">
-            <input type="text" name="receivable" style="width:300px;"  autocomplete="off" class="layui-input">
+            <input type="text" name="company" style="width:300px;" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">实收款(元)</label>
-        <div class="layui-input-block">
-            <input type="text" name="received" style="width:300px;"  autocomplete="off" class="layui-input">
+        <div class="layui-inline">
+            <label class="layui-form-label">出行时间</label>
+            <div class="layui-input-inline">
+                <input type="text" class="layui-input" required  lay-verify="required" style="width:300px;" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
+            </div>
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">b2b报名(元)</label>
+        <label class="layui-form-label">金额(元)</label>
         <div class="layui-input-block">
-            <input type="text" name="b2b" style="width:300px;"  autocomplete="off" class="layui-input">
+            <input type="text" name="price" style="width:300px;" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">操作/业务</label>
+        <label class="layui-form-label">套现(元)</label>
         <div class="layui-input-block">
-            <input type="text" name="operator" style="width:300px;"  autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">门市</label>
-        <div class="layui-input-block">
-            <input type="text" name="salesroom" style="width:300px;"  autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">合同</label>
-        <div class="layui-input-block">
-            <input type="text" name="contract" style="width:300px;"  autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-form-item">
-        <label class="layui-form-label">发票抬头</label>
-        <div class="layui-input-block">
-            <input type="text" name="invoice" style="width:300px;"  autocomplete="off" class="layui-input">
+            <input type="text" name="getprice" style="width:300px;" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
         <label class="layui-form-label">备注</label>
         <div class="layui-input-block">
-            <input type="text" name="more" style="width:300px;"  autocomplete="off" class="layui-input">
+            <input type="text" name="more" style="width:300px;" autocomplete="off" class="layui-input">
         </div>
     </div>
     <div class="layui-form-item">
@@ -120,7 +83,7 @@
         var form =new FormData($("#editForm")[0]);     //通过id获取表单的数据
         $.ajax({
             type:"POST",                             //请求的类型
-            url:"<%=path %>/qz/doaddQz",                      //请求的路径
+            url:"<%=path %>/gwj/doaddGwj",                      //请求的路径
             data: form,                              //请求的参数
             async: false,
             cache: false,

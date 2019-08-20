@@ -5,7 +5,7 @@ import com.gl.mgr.bean.Lxy;
 
 public interface LxyService {
     PageInfo<Lxy> queryAllLxy(Lxy checkLxy, int currentPage, int pageLimit);
-    PageInfo<Lxy> queryFinishLxy(Lxy checkLxy,int currentPage,int pageLimit);
+    PageInfo<Lxy> queryNomal(Lxy checkLxy,int currentPage,int pageLimit);
     PageInfo<Lxy> queryProcessLxy(Lxy checkLxy,int currentPage,int pageLimit);
     Lxy queryLxyByExample(Lxy lxy);
     int insertLxy(Lxy lxy);

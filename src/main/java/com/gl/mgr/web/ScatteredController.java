@@ -113,6 +113,7 @@ public class ScatteredController {
                     "<tr><td align='right'>门市:&nbsp;</td><td><span align='left'>"+scattered.getSalesroom()+"</span></td></tr>" +
                     "<tr><td align='right'>合同:&nbsp;</td><td><span align='left'>"+scattered.getContract()+"</span></td></tr>" +
                     "<tr><td align='right'>发票抬头:&nbsp;</td><td><span align='left'>"+scattered.getInvoice()+"</span></td></tr>" +
+                    "<tr><td align='right'>操作业务:&nbsp;</td><td><span align='left'>"+scattered.getOperator()+"</span></td></tr>" +
                     "<tr><td align='right'>备注:&nbsp;</td><td><span align='left'>"+scattered.getMore()+"</span></td></tr>" +
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+finishDate+"</span></td></tr>"
                     +"</table>";
@@ -124,6 +125,7 @@ public class ScatteredController {
                     "<tr><td align='right'>门市:&nbsp;</td><td><span align='left'>"+scattered.getSalesroom()+"</span></td></tr>" +
                     "<tr><td align='right'>合同:&nbsp;</td><td><span align='left'>"+scattered.getContract()+"</span></td></tr>" +
                     "<tr><td align='right'>发票抬头:&nbsp;</td><td><span align='left'>"+scattered.getInvoice()+"</span></td></tr>" +
+                    "<tr><td align='right'>操作业务:&nbsp;</td><td><span align='left'>"+scattered.getOperator()+"</span></td></tr>" +
                     "<tr><td align='right'>备注:&nbsp;</td><td><span align='left'>"+scattered.getMore()+"</span></td></tr>" +
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+"未完结"+"</span></td></tr>"
                     +"</table>";

@@ -33,9 +33,9 @@ public class LxyController {
         return "lxy/alllxy";
     }
 
-    @RequestMapping("finishlxy")
+    @RequestMapping("nomal")
     public String finishlxy(){
-        return "lxy/finishlxy";
+        return "lxy/nomal";
     }
 
     @RequestMapping("processlxy")
@@ -65,13 +65,13 @@ public class LxyController {
     }
 
     @ResponseBody
-    @RequestMapping("getfinishlxy")
-    public Map<String,Object> getfinishlxy(@RequestParam(value="keyWord", required=false) String keyWord,int page,int limit){
+    @RequestMapping("getNomal")
+    public Map<String,Object> getNomal(@RequestParam(value="keyWord", required=false) String keyWord,int page,int limit){
         Lxy lxy = new Lxy();
         if(keyWord != null && keyWord !=""){
             lxy.setName(keyWord);
         }
-        PageInfo<Lxy> pageInfo = lxyService.queryFinishLxy(lxy,page,limit);
+        PageInfo<Lxy> pageInfo = lxyService.queryNomal(lxy,page,limit);
         Map<String,Object> map = new HashMap<String, Object>();
         map.put("data",pageInfo.getList());
         map.put("code",0);
@@ -114,6 +114,7 @@ public class LxyController {
                     "<tr><td align='right'>门市:&nbsp;</td><td><span align='left'>"+lxy.getSalesroom()+"</span></td></tr>" +
                     "<tr><td align='right'>合同:&nbsp;</td><td><span align='left'>"+lxy.getContract()+"</span></td></tr>" +
                     "<tr><td align='right'>发票抬头:&nbsp;</td><td><span align='left'>"+lxy.getInvoice()+"</span></td></tr>" +
+                    "<tr><td align='right'>操作业务:&nbsp;</td><td><span align='left'>"+lxy.getOperator()+"</span></td></tr>" +
                     "<tr><td align='right'>备注:&nbsp;</td><td><span align='left'>"+lxy.getMore()+"</span></td></tr>" +
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+finishDate+"</span></td></tr>"
                     +"</table>";
@@ -127,6 +128,7 @@ public class LxyController {
                      "<tr><td align='right'>门市:&nbsp;</td><td><span align='left'>"+lxy.getSalesroom()+"</span></td></tr>" +
                      "<tr><td align='right'>合同:&nbsp;</td><td><span align='left'>"+lxy.getContract()+"</span></td></tr>" +
                      "<tr><td align='right'>发票抬头:&nbsp;</td><td><span align='left'>"+lxy.getInvoice()+"</span></td></tr>" +
+                     "<tr><td align='right'>操作业务:&nbsp;</td><td><span align='left'>"+lxy.getOperator()+"</span></td></tr>" +
                      "<tr><td align='right'>备注:&nbsp;</td><td><span align='left'>"+lxy.getMore()+"</span></td></tr>" +
                     "<tr><td align='right'>完结日期:&nbsp;</td><td><span align='left'>"+"未完结"+"</span></td></tr>"
                     +"</table>";

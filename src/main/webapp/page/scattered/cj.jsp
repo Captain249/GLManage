@@ -61,7 +61,7 @@
                 /*,{field:'salesroom',width:'5%', title: '门市'}*/
                /* ,{field:'contract',width:'7%', title: '合同'}
                 ,{field:'invoice',width:'7%', title: '发票抬头'}*/
-                ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl'}
+                ,{field:'status',width:'7%', title: '状态',templet: '#stateTpl',sort: true}
                 ,{fixed: 'right', width:'21%', title:'操作', align:'center', toolbar: '#barDemo'}
             ]]
             ,page:true
@@ -97,9 +97,10 @@
                     success: function (data) {
                         layer.open({
                             title:'查看详情',
-                            area:['300px','300px'],
+                            area:['300px','330px'],
                             shade: 0.4,
                             content: data.html,
+                            offset:"t"
                         })
                     },
                     error:function(){

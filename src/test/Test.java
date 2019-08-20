@@ -1,7 +1,9 @@
 import com.gl.mgr.bean.*;
 import com.gl.mgr.dao.LxyMapper;
 import com.gl.mgr.dao.MemberMapper;
+import com.gl.mgr.dao.ScatteredMapper;
 import com.gl.mgr.dao.UserMapper;
+import com.gl.mgr.web.SysController;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -10,8 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,6 +25,8 @@ public class Test {
     private LxyMapper lxyMapper;
     @Autowired
     private MemberMapper memberMapper;
+    @Autowired
+    private ScatteredMapper scatteredMapper;
     @org.junit.Test
     public void insertUser(){
         User user = new User();
@@ -68,4 +71,67 @@ public class Test {
         List<Integer> idlist = memberMapper.queryMembersByLxyId(1);
         System.out.println("a");
     }
+
+    @org.junit.Test
+    public void yearStatistic(){
+        String year = "2019";
+        Map<String,List<Integer>> resultMap = new HashMap<String,List<Integer>>();
+        List<Statistic> lxyStatistic = lxyMapper.statistic(year);
+        List<Statistic> skStatistic = scatteredMapper.statistic(year);
+        List<BigDecimal> lxyYs = new ArrayList<BigDecimal>();
+        for(int i=0;i<12;i++){
+            lxyYs.add(new BigDecimal(0));
+        }
+        List<BigDecimal> lxySs = new ArrayList<BigDecimal>();
+        for(int i=0;i<12;i++){
+            lxySs.add(new BigDecimal(0));
+        }
+        List<BigDecimal> lxyB2bs = new ArrayList<BigDecimal>();
+        for(int i=0;i<12;i++){
+            lxyB2bs.add(new BigDecimal(0));
+        }
+        List<Integer> lxyNum = new ArrayList<Integer>();
+        for(int i=0;i<12;i++){
+            lxyNum.add(0);
+        }
+
+        List<BigDecimal> skYs = new ArrayList<BigDecimal>();
+        for(int i=0;i<12;i++){
+            skYs.add(new BigDecimal(0));
+        }
+        List<BigDecimal> skSs = new ArrayList<BigDecimal>();
+        for(int i=0;i<12;i++){
+            skSs.add(new BigDecimal(0));
+        }
+        List<BigDecimal> skB2bs = new ArrayList<BigDecimal>();
+        for(int i=0;i<12;i++){
+            skB2bs.add(new BigDecimal(0));
+        }
+        List<Integer> skNum = new ArrayList<Integer>();
+        for(int i=0;i<12;i++){
+            skNum.add(0);
+        }
+        for (int i =0 ;i<12;i++){
+            for(Statistic lxyS:lxyStatistic){
+                if(Integer.parseInt(lxyS.getTime().substring(5)) == i){
+                    lxyYs.set(i,lxyS.getYs());
+                    lxySs.set(i,lxyS.getSs());
+                    lxyB2bs.set(i,lxyS.getB2bs());
+                    lxyNum.set(i,lxyS.getNum());
+                    break;
+                }
+            }
+            for(Statistic skS:skStatistic){
+                if(Integer.parseInt(skS.getTime().substring(5)) == i){
+                    skYs.set(i,skS.getYs());
+                    skSs.set(i,skS.getSs());
+                    skB2bs.set(i,skS.getB2bs());
+                    skNum.set(i,skS.getNum());
+                    break;
+                }
+            }
+        }
+        System.out.println("ad");
+    }
+
 }

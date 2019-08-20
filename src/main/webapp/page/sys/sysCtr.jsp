@@ -50,21 +50,20 @@
 </script>
 <script type="text/javascript">
     $(document).ready(function(){
+        var monthList = [];
+        for (var i = 1; i < 13; i++) {
+            monthList.push(i + "月");
+        }
         $.ajax({
-            type:"get",                             //请求的类型
             url:"<%=path%>/sys/getBaseData",                  //请求的路径
+            data : JSON.stringify({"year":"2019"}),
+            type: "POST",
+            contentType:"application/json;charset=utf-8",
             success: function (data) {              //成功返回触发的方法
-                var datalist = data.list1;
-                var datalist4 = data.list2;
-                var monthList = [];
-                for (var i = 1; i < 13; i++) {
-                    monthList.push(i + "月");
-                }
                 // 基于准备好的dom，初始化echarts实例
                 var myChart = echarts.init(document.getElementById('main'));
-
                 // 指定图表的配置项和数据
-                var option = {
+                var option2 = {
                     title: {
                         text: '报表测试功能'
                     },
@@ -79,33 +78,16 @@
                     series: [{
                         name: '疗休养',
                         type: 'bar',
-                        data: datalist
+                        data: data["lxySs"]
                     },
                         {
                             name: '散客',
                             type: 'bar',
-                            data: datalist4
+                            data: data["skSs"]
                         }]
                 };
-                // 使用刚指定的配置项和数据显示图表。
-                myChart.setOption(option);
-            },
-            error:function(){
-            }
-        });
 
-        $.ajax({
-            type:"get",                             //请求的类型
-            url:"<%=path%>/sys/getBaseData",                  //请求的路径
-            success: function (data) {//成功返回触发的方法
                 var myChart2 = echarts.init(document.getElementById('main2'));
-                var xData = function() {
-                    var data = [];
-                    for (var i = 1; i < 13; i++) {
-                        data.push(i + "月");
-                    }
-                    return data;
-                }();
                 option = {
                     backgroundColor: "#f2f2f2",
                     "title": {
@@ -140,7 +122,7 @@
                         textStyle: {
                             color: '#90979c',
                         },
-                        "data": ['女', '男', '总数']
+                        "data": ['疗休养', '散客', '总数']
                     },
 
 
@@ -165,7 +147,7 @@
                             "interval": 0,
 
                         },
-                        "data": xData,
+                        "data": monthList,
                     }],
                     "yAxis": [{
                         "type": "value",
@@ -218,7 +200,7 @@
                         "end": 35
                     }],
                     "series": [{
-                        "name": "女",
+                        "name": "疗休养",
                         "type": "bar",
                         "stack": "总量",
                         "barMaxWidth": 35,
@@ -239,11 +221,11 @@
                                 }
                             }
                         },
-                        "data":data.list1,
+                        "data":data["lxySs"],
                     },
 
                         {
-                            "name": "男",
+                            "name": "散客",
                             "type": "bar",
                             "stack": "总量",
                             "itemStyle": {
@@ -259,7 +241,7 @@
                                     }
                                 }
                             },
-                            "data": data.list2
+                            "data": data["skSs"]
                         }, {
                             "name": "总数",
                             "type": "line",
@@ -279,33 +261,17 @@
                                     }
                                 }
                             },
-                            "data": [
-                                1036,
-                                3693,
-                                2962,
-                                3810,
-                                2519,
-                                1915,
-                                1748,
-                                4675,
-                                6209,
-                                4323,
-                                2865,
-                                4298
-                            ]
+                            "data": data["sumSs"]
                         },
                     ]
                 }
                 // 使用刚指定的配置项和数据显示图表。
                 myChart2.setOption(option);
+                myChart.setOption(option2);
             },
             error:function(){
             }
         });
-
-
-
-
     });
 </script>
 </body>

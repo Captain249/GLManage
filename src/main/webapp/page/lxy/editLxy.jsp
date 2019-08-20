@@ -20,45 +20,59 @@
             <label class="layui-form-label">类型</label>
             <div class="layui-input-block" style="width: 300px;">
                 <select name="grouptype" lay-verify="required">
+                    <c:if test="${editLxy.grouptype eq '普通团队'}">
+                        <option value="">请选择</option>
+                        <option value="普通团队" selected>普通团队</option>
+                        <option value="医院">医院</option>
+                        <option value="学校">学校</option>
+                        <option value="企业">企业</option>
+                        <option value="街道">街道</option>
+                        <option value="行政事业单位">行政事业单位</option>
+                    </c:if>
                     <c:if test="${editLxy.grouptype eq '医院'}">
                         <option value="">请选择</option>
+                        <option value="普通团队">普通团队</option>
                         <option value="医院" selected>医院</option>
                         <option value="学校">学校</option>
                         <option value="企业">企业</option>
                         <option value="街道">街道</option>
-                        <option value="行政事业单位">事业单位</option>
+                        <option value="行政事业单位">行政事业单位</option>
                     </c:if>
                     <c:if test="${editLxy.grouptype eq '学校'}">
                         <option value="">请选择</option>
+                        <option value="普通团队">普通团队</option>
                         <option value="医院">医院</option>
                         <option value="学校" selected>学校</option>
                         <option value="企业">企业</option>
                         <option value="街道">街道</option>
-                        <option value="行政事业单位">事业单位</option>
+                        <option value="行政事业单位">行政事业单位</option>
                     </c:if>
                     <c:if test="${editLxy.grouptype eq '企业'}">
                         <option value="">请选择</option>
+                        <option value="普通团队">普通团队</option>
                         <option value="医院">医院</option>
                         <option value="学校">学校</option>
                         <option value="企业" selected>企业</option>
                         <option value="街道">街道</option>
-                        <option value="行政事业单位">事业单位</option>
+                        <option value="行政事业单位">行政事业单位</option>
                     </c:if>
                     <c:if test="${editLxy.grouptype eq '街道'}">
                         <option value="">请选择</option>
+                        <option value="普通团队">普通团队</option>
                         <option value="医院">医院</option>
                         <option value="学校">学校</option>
                         <option value="企业">企业</option>
                         <option value="街道" selected>街道</option>
-                        <option value="行政事业单位">事业单位</option>
+                        <option value="行政事业单位">行政事业单位</option>
                     </c:if>
                     <c:if test="${editLxy.grouptype eq '行政事业单位'}">
                         <option value="">请选择</option>
+                        <option value="普通团队">普通团队</option>
                         <option value="医院">医院</option>
                         <option value="学校">学校</option>
                         <option value="企业">企业</option>
                         <option value="街道">街道</option>
-                        <option value="行政事业单位" selected>事业单位</option>
+                        <option value="行政事业单位" selected>行政事业单位</option>
                     </c:if>
                 </select>
             </div>
@@ -66,87 +80,87 @@
         <div class="layui-form-item">
             <label class="layui-form-label">行程</label>
             <div class="layui-input-block">
-                <input type="text" name="name" style="width:300px;" required value="${editLxy.name}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="name" style="width:300px;" value="${editLxy.name}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">单位名</label>
             <div class="layui-input-block">
-                <input type="text" name="gname" style="width:300px;" required value="${editLxy.gname}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="gname" style="width:300px;" value="${editLxy.gname}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-inline">
                 <label class="layui-form-label">开始日期</label>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" style="width:300px;" value="${startDate}" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
+                    <input type="text" class="layui-input" style="width:300px;" required lay-verify="required" value="${startDate}" name="startdateStr" id="startdate" placeholder="yyyy年MM月dd日">
                 </div>
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">人数</label>
             <div class="layui-input-block">
-                <input type="text" name="numcount" style="width:300px;" required value="${editLxy.numcount}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="numcount" style="width:300px;" value="${editLxy.numcount}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">负责人</label>
             <div class="layui-input-block">
-                <input type="text" name="principal" style="width:300px;" required value="${editLxy.principal}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="principal" style="width:300px;" value="${editLxy.principal}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">手机号</label>
             <div class="layui-input-block">
-                <input type="text" name="phonenum" style="width:300px;" required value="${editLxy.phonenum}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="phonenum" style="width:300px;" value="${editLxy.phonenum}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">应收款(元)</label>
             <div class="layui-input-block">
-                <input type="text" name="receivable" style="width:300px;" required value="${editLxy.receivable}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="receivable" style="width:300px;" value="${editLxy.receivable}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">实收款(元)</label>
             <div class="layui-input-block">
-                <input type="text" name="received" style="width:300px;" required value="${editLxy.received}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="received" style="width:300px;" value="${editLxy.received}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">b2b报名(元)</label>
             <div class="layui-input-block">
-                <input type="text" name="b2b" style="width:300px;" required value="${editLxy.b2b}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="b2b" style="width:300px;" value="${editLxy.b2b}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">操作/业务</label>
             <div class="layui-input-block">
-                <input type="text" name="operator" style="width:300px;" required value="${editLxy.operator}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="operator" style="width:300px;" value="${editLxy.operator}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">门市</label>
             <div class="layui-input-block">
-                <input type="text" name="salesroom" style="width:300px;" required value="${editLxy.salesroom}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="salesroom" style="width:300px;" value="${editLxy.salesroom}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">合同</label>
             <div class="layui-input-block">
-                <input type="text" name="contract" style="width:300px;" required value="${editLxy.contract}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="contract" style="width:300px;" value="${editLxy.contract}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">发票抬头</label>
             <div class="layui-input-block">
-                <input type="text" name="invoice" style="width:300px;" required value="${editLxy.invoice}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="invoice" style="width:300px;" value="${editLxy.invoice}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
-                <input type="text" name="more" style="width:300px;" required value="${editLxy.more}" lay-verify="required" autocomplete="off" class="layui-input">
+                <input type="text" name="more" style="width:300px;" value="${editLxy.more}" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
