@@ -320,4 +320,9 @@
       enddate = #{enddate,jdbcType=DATE}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="statisticGwj" parameterType="java.lang.String" resultType="com.gl.mgr.bean.Statistic">
+      select sum(price)-sum(getprice) as ss,date_format(startDate, '%Y-%m') as time, count(*) as num from gwj group by time having time BETWEEN CONCAT(#{year},'-01') and CONCAT(#{year},'-12')
+  </select>
+
 </mapper>

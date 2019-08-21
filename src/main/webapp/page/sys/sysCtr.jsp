@@ -30,16 +30,12 @@
     </div>
 </div>
 <div class="layui-row">
-    <div class="layui-col-xs3">
-        <div class="grid-demo grid-demo-bg1">测试阶段</div>
+    <div class="layui-col-xs6">
+        <div class="grid-demo grid-demo-bg1">
+            <div id="main3" style="width: 100%;height:60%;"></div>
+        </div>
     </div>
-    <div class="layui-col-xs3">
-        <div class="grid-demo">3/12</div>
-    </div>
-    <div class="layui-col-xs3">
-        <div class="grid-demo grid-demo-bg1">3/12</div>
-    </div>
-    <div class="layui-col-xs3">
+    <div class="layui-col-xs6">
         <div class="grid-demo">3/12</div>
     </div>
 </div>
@@ -62,36 +58,46 @@
             success: function (data) {              //成功返回触发的方法
                 // 基于准备好的dom，初始化echarts实例
                 var myChart = echarts.init(document.getElementById('main'));
+                var myChart2 = echarts.init(document.getElementById('main2'));
+                var myChart3 = echarts.init(document.getElementById('main3'));
                 // 指定图表的配置项和数据
-                var option2 = {
+
+                var option = {
                     title: {
-                        text: '报表测试功能'
+                        "text": "2019年各业绩柱状图",
+                        x: "4%",
+                        textStyle: {
+                            color: '#000000',
+                            fontSize: '22'
+                        },
                     },
                     tooltip: {},
                     legend: {
-                        data:['疗休养','散客']
+                        data: ['普通团队', '疗休养','散客']
                     },
                     xAxis: {
                         data: monthList
                     },
                     yAxis: {},
                     series: [{
+                        name: '普通团队',
+                        type: 'bar',
+                        data: data["nomalSs"]
+                    },{
                         name: '疗休养',
                         type: 'bar',
                         data: data["lxySs"]
-                    },
-                        {
+                    },{
                             name: '散客',
                             type: 'bar',
                             data: data["skSs"]
                         }]
                 };
 
-                var myChart2 = echarts.init(document.getElementById('main2'));
-                option = {
+                option2 = {
                     backgroundColor: "#f2f2f2",
                     "title": {
-                        "text": "年度营业额",
+                        "text": "2019年团队与散客比重图",
                         x: "4%",
                         textStyle: {
                             color: '#000000',
@@ -122,7 +128,7 @@
                         textStyle: {
                             color: '#90979c',
                         },
-                        "data": ['疗休养', '散客', '总数']
+                        "data": ['普通团队', '疗休养','散客', '总数']
                     },
 
 
@@ -200,7 +206,7 @@
                         "end": 35
                     }],
                     "series": [{
-                        "name": "疗休养",
+                        "name": "普通团队",
                         "type": "bar",
                         "stack": "总量",
                         "barMaxWidth": 35,
@@ -221,16 +227,33 @@
                                 }
                             }
                         },
-                        "data":data["lxySs"],
+                        "data":data["nomalSs"],
+                    },{
+                        "name": "疗休养",
+                        "type": "bar",
+                        "stack": "总量",
+                        "itemStyle": {
+                            "normal": {
+                                "color": "rgba(0,191,183,1)",
+                                "barBorderRadius": 0,
+                                "label": {
+                                    "show": true,
+                                    "position": "insideTop",
+                                    formatter: function(p) {
+                                        return p.value > 0 ? (p.value) : '';
+                                    }
+                                }
+                            }
+                        },
+                        "data": data["lxySs"]
                     },
-
                         {
                             "name": "散客",
                             "type": "bar",
                             "stack": "总量",
                             "itemStyle": {
                                 "normal": {
-                                    "color": "rgba(0,191,183,1)",
+                                    "color": "rgba(144, 238 ,144, 0.5)",
                                     "barBorderRadius": 0,
                                     "label": {
                                         "show": true,
@@ -265,9 +288,72 @@
                         },
                     ]
                 }
+
+                option3 = {
+                    title: {
+                        "text": "2019年业绩堆叠区域图",
+                        x: "2%",
+                        textStyle: {
+                            color: '#000000',
+                            fontSize: '22'
+                        },
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data: ['普通团队', '疗休养','散客']
+                    },
+                    /* toolbox: {
+                         feature: {
+                             saveAsImage: {}
+                         }
+                     },*/
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : monthList
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'普通团队',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {normal: {}},
+                            data:data["nomalSs"]
+                        },
+                        {
+                            name:'疗休养',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {normal: {}},
+                            data:data["lxySs"]
+                        },
+                        {
+                            name:'散客',
+                            type:'line',
+                            stack: '总量',
+                            areaStyle: {normal: {}},
+                            data:data["skSs"]
+                        }]
+                };
                 // 使用刚指定的配置项和数据显示图表。
-                myChart2.setOption(option);
-                myChart.setOption(option2);
+                myChart.setOption(option);
+                myChart2.setOption(option2);
+                myChart3.setOption(option3);
             },
             error:function(){
             }

@@ -52,6 +52,9 @@
                 cache: false,
                 contentType: false,
                 processData: false,
+                beforeSend:function(){
+                    $("#submitbtn").attr("value","Logining~");
+                },
                 success: function (flag) {              //成功返回触发的方法
                     if(flag){
                         window.location.href="<%=path%>/user/toHome";

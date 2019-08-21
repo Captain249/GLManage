@@ -53,88 +53,78 @@ public class SysController {
 
     public Map<String,Object> getStatistic(String year){
         Map<String,Object> resultMap = new HashMap<String,Object>();
-        List<Statistic> lxyStatistics = lxyMapper.statistic(year);
+        List<Statistic> lxys = lxyMapper.statisticLxy(year);
+        List<Statistic> nomals = lxyMapper.statisticNomal(year);
+        //List<Statistic> td = lxyMapper.statistic(year);
         List<Statistic> skStatistics = scatteredMapper.statistic(year);
+
         //疗休养数据
-        List<BigDecimal> lxyYs = new ArrayList<BigDecimal>();
-        for(int i=0;i<12;i++){
-            lxyYs.add(new BigDecimal(0));
-        }
         List<BigDecimal> lxySs = new ArrayList<BigDecimal>();
         for(int i=0;i<12;i++){
             lxySs.add(new BigDecimal(0));
-        }
-        List<BigDecimal> lxyB2bs = new ArrayList<BigDecimal>();
-        for(int i=0;i<12;i++){
-            lxyB2bs.add(new BigDecimal(0));
         }
         List<Integer> lxyNum = new ArrayList<Integer>();
         for(int i=0;i<12;i++){
             lxyNum.add(0);
         }
-        //散客数据
-        List<BigDecimal> skYs = new ArrayList<BigDecimal>();
+
+        //普通团队数据
+        List<BigDecimal> nomalSs = new ArrayList<BigDecimal>();
         for(int i=0;i<12;i++){
-            skYs.add(new BigDecimal(0));
+            nomalSs.add(new BigDecimal(0));
         }
+        List<Integer> nomalNum = new ArrayList<Integer>();
+        for(int i=0;i<12;i++){
+            nomalNum.add(0);
+        }
+
+        //散客数据
         List<BigDecimal> skSs = new ArrayList<BigDecimal>();
         for(int i=0;i<12;i++){
             skSs.add(new BigDecimal(0));
-        }
-        List<BigDecimal> skB2bs = new ArrayList<BigDecimal>();
-        for(int i=0;i<12;i++){
-            skB2bs.add(new BigDecimal(0));
         }
         List<Integer> skNum = new ArrayList<Integer>();
         for(int i=0;i<12;i++){
             skNum.add(0);
         }
+
         //数据总和
-        List<BigDecimal> sumYs = new ArrayList<BigDecimal>();
-        for(int i=0;i<12;i++){
-            sumYs.add(new BigDecimal(0));
-        }
         List<BigDecimal> sumSs = new ArrayList<BigDecimal>();
         for(int i=0;i<12;i++){
             sumSs.add(new BigDecimal(0));
-        }
-        List<BigDecimal> sumB2bs = new ArrayList<BigDecimal>();
-        for(int i=0;i<12;i++){
-            sumB2bs.add(new BigDecimal(0));
         }
         List<Integer> sumNum = new ArrayList<Integer>();
         for(int i=0;i<12;i++){
             sumNum.add(0);
         }
 
-        for(Statistic lxyStatistic : lxyStatistics){
+        for(Statistic lxyStatistic : lxys){
             int j = Integer.parseInt(lxyStatistic.getTime().substring(5));
             int i = j-1;
-            if(lxyStatistic.getYs()!=null){
-                lxyYs.set(i,lxyStatistic.getYs());
-            }
             if(lxyStatistic.getSs()!=null){
                 lxySs.set(i,lxyStatistic.getSs());
-            }
-            if(lxyStatistic.getB2bs()!=null){
-                lxyB2bs.set(i,lxyStatistic.getB2bs());
             }
             if(lxyStatistic.getNum()!= 0){
                 lxyNum.set(i,lxyStatistic.getNum());
             }
         }
 
+        for(Statistic nomalStatistic : nomals){
+            int j = Integer.parseInt(nomalStatistic.getTime().substring(5));
+            int i = j-1;
+            if(nomalStatistic.getSs()!=null){
+                nomalSs.set(i,nomalStatistic.getSs());
+            }
+            if(nomalStatistic.getNum()!= 0){
+                nomalNum.set(i,nomalStatistic.getNum());
+            }
+        }
+
         for(Statistic skStatistic : skStatistics){
             int j = Integer.parseInt(skStatistic.getTime().substring(5));
             int i = j-1;
-            if (skStatistic.getYs()!=null) {
-                skYs.set(i,skStatistic.getYs());
-            }
             if (skStatistic.getSs()!=null) {
                 skSs.set(i,skStatistic.getSs());
-            }
-            if (skStatistic.getB2bs()!=null) {
-                skB2bs.set(i,skStatistic.getB2bs());
             }
             if (skStatistic.getNum()!= 0 ) {
                 lxyNum.set(i,skStatistic.getNum());
@@ -142,25 +132,20 @@ public class SysController {
         }
 
         for(int i = 0;i<12; i++){
-            sumYs.set(i,lxyYs.get(i).add(skYs.get(i)));
-            sumSs.set(i,lxySs.get(i).add(skSs.get(i)));
-            sumB2bs.set(i,lxyB2bs.get(i).add(skB2bs.get(i)));
-            sumNum.set(i,lxyNum.get(i)+skNum.get(i));
+            sumSs.set(i,lxySs.get(i).add(skSs.get(i)).add(nomalSs.get(i)));
+            sumNum.set(i,lxyNum.get(i)+skNum.get(i)+nomalNum.get(i));
         }
 
-        resultMap.put("lxyYs",lxyYs);
         resultMap.put("lxySs",lxySs);
-        resultMap.put("lxyB2bs",lxyB2bs);
         resultMap.put("lxyNum",lxyNum);
 
-        resultMap.put("skYs",skYs);
+        resultMap.put("nomalSs",nomalSs);
+        resultMap.put("nomalNum",nomalNum);
+
         resultMap.put("skSs",skSs);
-        resultMap.put("skB2bs",skB2bs);
         resultMap.put("skNum",skNum);
 
-        resultMap.put("sumYs",sumYs);
         resultMap.put("sumSs",sumSs);
-        resultMap.put("sumB2bs",sumB2bs);
         resultMap.put("sumNum",sumNum);
         return resultMap;
     }

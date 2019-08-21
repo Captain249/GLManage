@@ -114,18 +114,14 @@ public class Test {
         for (int i =0 ;i<12;i++){
             for(Statistic lxyS:lxyStatistic){
                 if(Integer.parseInt(lxyS.getTime().substring(5)) == i){
-                    lxyYs.set(i,lxyS.getYs());
                     lxySs.set(i,lxyS.getSs());
-                    lxyB2bs.set(i,lxyS.getB2bs());
                     lxyNum.set(i,lxyS.getNum());
                     break;
                 }
             }
             for(Statistic skS:skStatistic){
                 if(Integer.parseInt(skS.getTime().substring(5)) == i){
-                    skYs.set(i,skS.getYs());
                     skSs.set(i,skS.getSs());
-                    skB2bs.set(i,skS.getB2bs());
                     skNum.set(i,skS.getNum());
                     break;
                 }

@@ -33,4 +33,8 @@ public interface LxyMapper {
     int deleteLxyMember(int lxyId);
 
     List<Statistic> statistic(String year);
+
+    List<Statistic> statisticLxy(String year);
+
+    List<Statistic> statisticNomal(String year);
 }

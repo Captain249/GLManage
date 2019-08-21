@@ -401,4 +401,8 @@
   <delete id="deleteQzMember" parameterType="java.lang.Integer">
       delete from qz_member where qid = #{qid}
   </delete>
+
+  <select id="statisticQz" parameterType="java.lang.String" resultType="com.gl.mgr.bean.Statistic">
+      select sum(received) as ss,date_format(startDate, '%Y-%m') as time, count(*) as num from qz group by time having time BETWEEN CONCAT(#{year},'-01') and CONCAT(#{year},'-12')
+  </select>
 </mapper>
