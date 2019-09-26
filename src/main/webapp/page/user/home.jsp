@@ -117,6 +117,7 @@
                             <dd><a lay-href="<%=path%>/qz/goallQz">签证</a></dd>
                             <dd><a lay-href="<%=path%>/gwj/allGwj">港务局</a></dd>
                             <dd><a lay-href="<%=path%>/zc/allZc">租车</a></dd>
+                            <dd hidden="hidden"><a lay-href="<%=path%>/member/allmembersQz?qzid=0" id="member3">全部人员</a></dd>
                         </dl>
                     </li>
                    <%-- <li data-name="template" class="layui-nav-item">
